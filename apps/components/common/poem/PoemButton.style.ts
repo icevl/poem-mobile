@@ -8,8 +8,8 @@ export default StyleSheet.create({
     container: {
         flexDirection: 'row',
         justifyContent: 'center',
-        opacity: 0.4,
-        marginRight: 20
+        opacity: 0.2,
+        marginRight: 30
     },
 
     icon: {
@@ -20,6 +20,7 @@ export default StyleSheet.create({
     label: {
         flexDirection: 'column',
         color: theme.color.cardText,
+        fontWeight: 'bold',
         fontSize: config.size.text,
         marginLeft: 8
     },

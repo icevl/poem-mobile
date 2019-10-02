@@ -5,15 +5,6 @@ import config from '../../../../config';
 const theme = Theme();
 
 export default StyleSheet.create({
-    container: {
-        backgroundColor: theme.color.cardBackground,
-        paddingLeft: 13,
-        paddingRight: 13,
-        paddingTop: 17,
-        paddingBottom: 17,
-        marginBottom: 3
-    },
-
     authorRow: {
         flexDirection: 'row',
         height: 50
@@ -43,13 +34,13 @@ export default StyleSheet.create({
         fontSize: config.size.text
     },
 
-    authorLocation: {
+    time: {
         position: 'relative',
         top: -3,
         color: theme.color.cardText,
         marginTop: 0,
         fontSize: config.size.text - 3,
-        opacity: 0.8
+        opacity: 0.5
     },
 
     contextMenuWrapper: {

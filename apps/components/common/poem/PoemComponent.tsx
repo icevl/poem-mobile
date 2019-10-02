@@ -9,6 +9,8 @@ import Touch from '../../../components/common/Touch';
 import PoemButton from './PoemButton';
 import { update } from '../../../../actions/poem';
 import LikeModel from '../../../../models/LikeModel';
+import Time from '../../../components/common/Time';
+import Card from '../Card';
 
 interface Props {
     item: Poem;
@@ -57,14 +59,14 @@ class PoemComponent extends Component<Props> {
             false
         );
         return (
-            <View style={styles.container}>
+            <Card>
                 <View style={styles.authorRow}>
                     <View style={styles.avatarWrapper}>
                         <Image uri='https://image.flaticon.com/icons/png/128/236/236831.png' style={styles.avatar} />
                     </View>
                     <View style={styles.authorWrapper}>
                         <Text style={styles.authorName}>{this.props.item.user.name}</Text>
-                        <Text style={styles.authorLocation}>Russia, Sochi</Text>
+                        <Time style={styles.time} date={this.props.item.created_at} />
                     </View>
                     <View style={styles.contextMenuWrapper}></View>
                 </View>
@@ -99,15 +101,16 @@ class PoemComponent extends Component<Props> {
                 )}
 
                 <View style={styles.buttonsWrapper}>
-                    <PoemButton icon='eye' value={this.props.item.views_count.toString()} />
                     <PoemButton
                         isActive={isLiked}
-                        icon='thumbs-up'
+                        icon={isLiked ? 'heart' : 'heart-outline'}
                         value={this.props.item.likes_count.toString()}
                         onPress={this.toggleLike.bind(this, isLiked)}
                     />
+                    <PoemButton icon='comment-outline' value={this.props.item.comments_count.toString()} />
+                    <PoemButton icon='eye-outline' value={this.props.item.views_count.toString()} />
                 </View>
-            </View>
+            </Card>
         );
     }
 }

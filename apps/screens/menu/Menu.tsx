@@ -14,13 +14,13 @@ class Menu extends React.Component<Props> {
     render() {
         return (
             <View style={styles.container}>
-                <NavBar leftButton='home' navigation={this.props.navigation} />
+                <NavBar navigation={this.props.navigation} />
 
                 <MenuBlock>
-                    <MenuLink title='Weapons' screen='Home' icon='flare' />
-                    <MenuLink title='News' screen='Home' icon='new-releases' />
-                    <MenuLink title='Clans' screen='Home' icon='group' />
-                    <MenuLink title='TOP' screen='Home' icon='announcement' />
+                    <MenuLink title='Weapons' screen='Feed' icon='flare' />
+                    <MenuLink title='News' screen='Feed' icon='new-releases' />
+                    <MenuLink title='Clans' screen='Feed' icon='group' />
+                    <MenuLink title='TOP' screen='Feed' icon='announcement' />
                 </MenuBlock>
 
                 <MenuBlock>

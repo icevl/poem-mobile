@@ -1,4 +1,4 @@
 export default {
-    feed: 'Лента',
+    feed: 'лента стихов',
     dedicate_to: 'Посвящено'
 };

@@ -6,7 +6,7 @@ import MenuScreen from './apps/screens/menu/Menu';
 
 const AppNavigator = createStackNavigator(
     {
-        Home: FeedScreen,
+        Feed: FeedScreen,
         Menu: MenuScreen
     },
     {

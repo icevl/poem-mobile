@@ -3,6 +3,7 @@ import { ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationScreenProp } from 'react-navigation';
 import NavBar from '../../components/menu/navbar/NavBar';
+import BottomBar from '../../components/menu/bottombar/BottomBar';
 import Content from '../../components/content/Content';
 import Phrase from '../../../language/index';
 import PoemComponent from '../../components/common/poem/PoemComponent';
@@ -40,6 +41,7 @@ class FeedScreen extends React.Component<Props> {
                         ))}
                     </ScrollView>
                 )}
+                <BottomBar navigation={this.props.navigation} />
             </Content>
         );
     }

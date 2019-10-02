@@ -21,7 +21,8 @@ export default class AppContainer extends React.Component<Props, State> {
 
     async componentDidMount() {
         await Font.loadAsync({
-            Electrolize: require('./assets/fonts/Electrolize.ttf')
+            Electrolize: require('./assets/fonts/Electrolize.ttf'),
+            Nautilus: require('./assets/fonts/Nautilus.otf')
         });
 
         this.setState({ isFontsLoaded: true });
