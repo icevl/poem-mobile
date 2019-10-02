@@ -9,4 +9,5 @@ export interface Poem {
     created_at: Date;
     user: any;
     comments: any;
+    likes: any;
 }

@@ -8,7 +8,7 @@ themes['dark'] = Dark;
 themes['ice'] = Ice;
 
 export default function Theme(): ThemeUI {
-    const selectedTheme = 'dark';
+    const selectedTheme = 'ice';
 
     if (themes[selectedTheme] != undefined) {
         return themes[selectedTheme];

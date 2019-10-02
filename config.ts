@@ -3,7 +3,8 @@ export default {
 
     paths: {
         weapons: '/weapons/',
-        feed: '/api/feed/'
+        feed: '/api/feed/',
+        likes: '/api/likes/'
     },
 
     size: {

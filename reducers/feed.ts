@@ -1,4 +1,5 @@
 import constants from '../constants/feed';
+import constantsPoem from '../constants/poem';
 
 const initialState = {
     isLoading: false,
@@ -38,6 +39,15 @@ export default function feed(state = initialState, action) {
             return {
                 ...state,
                 isLoading: false
+            };
+
+        case constantsPoem.POEM_UPDATE:
+            return {
+                ...state,
+                items: state.items.reduce(
+                    (acc, poem) => (poem.id === action.payload.id ? [...acc, action.payload] : [...acc, poem]),
+                    []
+                )
             };
 
         default:

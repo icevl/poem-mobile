@@ -22,5 +22,10 @@ export default StyleSheet.create({
         color: theme.color.cardText,
         fontSize: config.size.text,
         marginLeft: 8
+    },
+
+    active: {
+        color: theme.color.primary,
+        opacity: 0.9
     }
 });
