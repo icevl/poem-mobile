@@ -4,7 +4,8 @@ export default {
     paths: {
         weapons: '/weapons/',
         feed: '/api/feed/',
-        likes: '/api/likes/'
+        likes: '/api/likes/',
+        facebookSignIn: '/api/auth/fblogin'
     },
 
     size: {

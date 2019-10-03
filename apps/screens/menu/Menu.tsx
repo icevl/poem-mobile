@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, ImageBackground } from 'react-native';
+import { View, Text } from 'react-native';
+import { AsyncStorage } from 'react-native';
 import styles from './Menu.style';
 import { NavigationScreenProp } from 'react-navigation';
 import NavBar from '../../components/menu/navbar/NavBar';
@@ -11,6 +12,11 @@ interface Props {
 }
 
 class Menu extends React.Component<Props> {
+    async logOut() {
+        await AsyncStorage.removeItem('token');
+        this.props.navigation.navigate('Auth');
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -20,7 +26,7 @@ class Menu extends React.Component<Props> {
                     <MenuLink title='Weapons' screen='Feed' icon='flare' />
                     <MenuLink title='News' screen='Feed' icon='new-releases' />
                     <MenuLink title='Clans' screen='Feed' icon='group' />
-                    <MenuLink title='TOP' screen='Feed' icon='announcement' />
+                    <MenuLink title='Logout' onPress={this.logOut.bind(this)} icon='announcement' />
                 </MenuBlock>
 
                 <MenuBlock>
@@ -30,11 +36,6 @@ class Menu extends React.Component<Props> {
                 <MenuBlock>
                     <Text>123</Text>
                 </MenuBlock>
-
-                <ImageBackground
-                    style={[styles.fixed, styles.container, { zIndex: -1, opacity: 0.3 }]}
-                    source={require('../../../assets/images/weapons.jpg')}
-                />
             </View>
         );
     }

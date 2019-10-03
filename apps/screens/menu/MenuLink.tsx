@@ -7,7 +7,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 interface Props {
     title: string;
-    screen: string;
+    screen?: string;
+    onPress?: () => void;
     icon: string;
     navigator?: NavigationScreenProp<any, any>;
 }
@@ -22,7 +23,10 @@ class MenuLink extends Component<Props> {
     render() {
         const textStyle: any = { ...styles.text, fontFamily: 'Electrolize' };
         return (
-            <TouchComponent onPress={this.onNavigate.bind(this, this.props.screen)}>
+            <TouchComponent
+                onPress={
+                    this.props.onPress ? this.props.onPress.bind(this) : this.onNavigate.bind(this, this.props.screen)
+                }>
                 <View style={styles.content}>
                     <View>
                         <Icon name={this.props.icon} size={24} style={styles.icon} />

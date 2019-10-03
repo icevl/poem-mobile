@@ -28,6 +28,7 @@
         "eslint-plugin-jsx-a11y": "^6.2.3",
         "expo": "^34.0.1",
         "expo-blur": "^6.0.0",
+        "expo-facebook": "~6.0.0",
         "expo-font": "^6.0.1",
         "moment": "^2.24.0",
         "react": "16.8.3",

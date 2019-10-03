@@ -1,13 +1,10 @@
 import axios from 'react-native-axios';
-// import { AsyncStorage } from 'react-native';
+import { AsyncStorage } from 'react-native';
 import config from '../config';
 
 export default class Model {
-    request(params: any) {
-        const token =
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTY5OTQxNTk4fQ.tzN0k0RaMgD3TOA2mdWzrSZLwJ3OP3muXMrsIQUqKWQ';
-
-        // const token = await AsyncStorage.getItem('token');
+    async request(params: any) {
+        const token = await AsyncStorage.getItem('token');
         const method = params.type ? params.type.toUpperCase() : 'GET';
 
         const setup: any = {
