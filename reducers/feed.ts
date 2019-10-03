@@ -1,8 +1,10 @@
 import constants from '../constants/feed';
 import constantsPoem from '../constants/poem';
+import { updatePoemList } from '../helpers/poem';
 
 const initialState = {
     isLoading: false,
+    isRefreshLoading: false,
 
     items: [],
     paginator: {
@@ -48,6 +50,27 @@ export default function feed(state = initialState, action) {
                     (acc, poem) => (poem.id === action.payload.id ? [...acc, action.payload] : [...acc, poem]),
                     []
                 )
+            };
+
+        /** REFRESH */
+
+        case constants.FEED_LIST_REFRESH_REQUEST:
+            return {
+                ...state,
+                isRefreshLoading: true
+            };
+
+        case constants.FEED_LIST_REFRESH_SUCCESS:
+            return {
+                ...state,
+                isRefreshLoading: false,
+                items: updatePoemList(state.items, action.payload)
+            };
+
+        case constants.FEED_LIST_REFRESH_FAIL:
+            return {
+                ...state,
+                isRefreshLoading: false
             };
 
         default:

@@ -27,3 +27,24 @@ export function getList(page: number) {
             });
     };
 }
+
+export function refreshFeed() {
+    return dispatch => {
+        dispatch({
+            type: constants.FEED_LIST_REFRESH_REQUEST
+        });
+
+        Model.getList(1)
+            .then((r: any) => {
+                dispatch({
+                    type: constants.FEED_LIST_REFRESH_SUCCESS,
+                    payload: r.results
+                });
+            })
+            .catch(() => {
+                dispatch({
+                    type: constants.FEED_LIST_REFRESH_FAIL
+                });
+            });
+    };
+}
