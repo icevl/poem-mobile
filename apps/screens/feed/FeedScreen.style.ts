@@ -1,10 +1,12 @@
 import { StyleSheet, Dimensions } from 'react-native';
+import config from '../../../config';
 
 export default StyleSheet.create({
     containter: {
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height
     },
+
     fixed: {
         position: 'absolute',
         top: 0,
@@ -15,6 +17,6 @@ export default StyleSheet.create({
 
     scrollView: {
         backgroundColor: 'transparent',
-        marginBottom: 50
+        marginBottom: config.size.bottomBar
     }
 });

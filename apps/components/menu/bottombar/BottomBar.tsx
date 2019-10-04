@@ -12,6 +12,7 @@ interface Props {
 
 const BottomBar = (props: Props) => {
     const user = useSelector((state: any) => state.user);
+    const currentScreen = props.navigation.state.routeName;
 
     useEffect(() => {
         console.log('user', user);
@@ -23,9 +24,13 @@ const BottomBar = (props: Props) => {
 
     return (
         <View style={styles.container}>
-            <BottomBarButton icon='calendar' onPress={() => setScreen('Feed')} isActive />
+            <BottomBarButton icon='calendar' onPress={() => setScreen('Feed')} isActive={currentScreen === 'Feed'} />
             <BottomBarButton icon='search' />
-            <BottomBarButton icon='plus' />
+            <BottomBarButton
+                icon='plus'
+                onPress={() => setScreen('PoemForm')}
+                isActive={currentScreen === 'PoemForm'}
+            />
             <BottomBarButton icon='envelope' />
             <BottomBarButton icon='user' onPress={() => setScreen('Menu')} />
         </View>

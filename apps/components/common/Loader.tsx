@@ -15,13 +15,15 @@ export default class Loader extends Component<Props> {
 
         return (
             <View style={styles.content}>
-                <Animatable.Image
-                    style={styles.image}
-                    source={require('../../../assets/images/loader.png')}
-                    animation='pulse'
-                    easing='ease-out'
-                    iterationCount='infinite'
-                />
+                <View style={styles.wrapper}>
+                    <Animatable.Image
+                        style={styles.image}
+                        source={require('../../../assets/images/loader.png')}
+                        animation='pulse'
+                        easing='ease-out'
+                        iterationCount='infinite'
+                    />
+                </View>
             </View>
         );
     }

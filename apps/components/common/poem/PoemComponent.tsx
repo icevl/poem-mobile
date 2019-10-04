@@ -73,8 +73,8 @@ class PoemComponent extends Component<Props> {
                 <View style={styles.contentWrapper}>
                     <Text style={styles.title}>{this.props.item.title}</Text>
                     <Text style={styles.text}>
-                        {/* {this.props.item.content} */}
-                        Октябрь уж наступил — уж роща отряхает{'\n'}
+                        {this.props.item.content}
+                        {/* Октябрь уж наступил — уж роща отряхает{'\n'}
                         Последние листы с нагих своих ветвей;{'\n'}
                         Дохнул осенний хлад — дорога промерзает.{'\n'}
                         Журча еще бежит за мельницу ручей,{'\n'}
@@ -89,7 +89,7 @@ class PoemComponent extends Component<Props> {
                         Люблю ее снега; в присутствии луны{'\n'}
                         Как легкий бег саней с подругой быстр и волен,{'\n'}
                         Когда под соболем, согрета и свежа,{'\n'}
-                        Она вам руку жмет, пылая и дрожа!
+                        Она вам руку жмет, пылая и дрожа! */}
                     </Text>
                 </View>
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollView, RefreshControl } from 'react-native';
 import { connect } from 'react-redux';
-import { NavigationScreenProp } from 'react-navigation';
+import { NavigationScreenProp, withNavigationFocus } from 'react-navigation';
 import NavBar from '../../components/menu/navbar/NavBar';
 import BottomBar from '../../components/menu/bottombar/BottomBar';
 import Content from '../../components/content/Content';
@@ -12,6 +12,12 @@ import styles from './FeedScreen.style';
 import Loader from '../../components/common/Loader';
 import { getList, refreshFeed } from '../../../actions/feed';
 
+interface Paginator {
+    page: number;
+    pages: number;
+    total: number;
+}
+
 interface Props {
     actions: any;
     feed: Poem[];
@@ -19,6 +25,9 @@ interface Props {
     isRefreshLoading: boolean;
     navigation: NavigationScreenProp<any, any>;
     getList?: (id: number) => void;
+    refreshFeed?: (options: any) => void;
+    isFocused?: boolean;
+    paginator: Paginator;
 }
 
 class FeedScreen extends React.Component<Props> {
@@ -26,34 +35,57 @@ class FeedScreen extends React.Component<Props> {
         this.props.getList(1);
     }
 
+    componentDidUpdate(prevProps) {
+        if (!prevProps.isFocused && this.props.isFocused) {
+            //@ts-ignore
+            this.scrollRef.scrollTo({ x: 0, y: 0, animated: false });
+            this.props.refreshFeed({ showLoader: true });
+        }
+    }
+
     onRefresh() {
         this.props.refreshFeed();
     }
 
-    render() {
-        const feed = this.props.feed;
+    onScroll({ nativeEvent }) {
+        if (
+            !this.props.isLoading &&
+            this.isCloseToBottom(nativeEvent) &&
+            this.props.paginator.page < this.props.paginator.pages
+        ) {
+            const nextpage = this.props.paginator.page + 1;
+            this.props.getList(nextpage);
+        }
+    }
 
-        // console.log('feed', feed);
+    isCloseToBottom({ layoutMeasurement, contentOffset, contentSize }) {
+        return layoutMeasurement.height + contentOffset.y >= contentSize.height - 50;
+    }
+
+    render() {
+        const { navigation } = this.props;
 
         return (
             <Content>
-                <NavBar title={Phrase('feed')} leftButton='menu' navigation={this.props.navigation} />
+                <NavBar title={Phrase('feed')} navigation={navigation} />
                 <Loader isLoading={this.props.isLoading} />
-                {!this.props.isLoading && (
-                    <ScrollView
-                        style={styles.scrollView}
-                        refreshControl={
-                            <RefreshControl
-                                refreshing={this.props.isRefreshLoading}
-                                onRefresh={this.onRefresh.bind(this)}
-                            />
-                        }>
-                        {feed.map((item, key) => (
-                            <PoemComponent item={item} key={key} />
-                        ))}
-                    </ScrollView>
-                )}
-                <BottomBar navigation={this.props.navigation} />
+
+                <ScrollView
+                    ref={ref => (this.scrollRef = ref)}
+                    style={styles.scrollView}
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={this.props.isRefreshLoading}
+                            onRefresh={this.onRefresh.bind(this)}
+                        />
+                    }
+                    onScroll={this.onScroll.bind(this)}>
+                    {this.props.feed.map((item, key) => (
+                        <PoemComponent item={item} key={key} />
+                    ))}
+                </ScrollView>
+
+                <BottomBar navigation={navigation} />
             </Content>
         );
     }
@@ -61,13 +93,15 @@ class FeedScreen extends React.Component<Props> {
 
 const mapStateToProps = (state: any) => {
     return {
-        feed: state.feed.items,
         isLoading: state.feed.isLoading,
-        isRefreshLoading: state.feed.isRefreshLoading
+        isRefreshLoading: state.feed.isRefreshLoading,
+        feed: state.feed.items,
+        paginator: state.feed.paginator
     };
 };
 
 export default connect(
     mapStateToProps,
     { getList, refreshFeed }
-)(FeedScreen);
+    //@ts-ignore
+)(withNavigationFocus(FeedScreen));

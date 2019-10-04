@@ -30,8 +30,12 @@ export default function feed(state = initialState, action) {
             return {
                 ...state,
                 isLoading: false,
-                items: action.payload.results,
+                items:
+                    action.payload.page === 1
+                        ? action.payload.results
+                        : updatePoemList(state.items, action.payload.results),
                 paginator: {
+                    ...state.paginator,
                     total: action.payload.total,
                     pages: action.payload.pages
                 }
@@ -57,7 +61,7 @@ export default function feed(state = initialState, action) {
         case constants.FEED_LIST_REFRESH_REQUEST:
             return {
                 ...state,
-                isRefreshLoading: true
+                isRefreshLoading: action.payload.showLoader || !('showLoader' in action.payload)
             };
 
         case constants.FEED_LIST_REFRESH_SUCCESS:

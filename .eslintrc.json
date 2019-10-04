@@ -23,6 +23,12 @@
         "no-use-before-define": "off",
         "react/jsx-filename-extension": "off",
         "react/prop-types": "off",
-        "comma-dangle": "off"
+        "comma-dangle": "off",
+        "no-extra-boolean-cast": "off"
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
     }
 }

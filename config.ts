@@ -6,11 +6,13 @@ export default {
         feed: '/api/feed/',
         likes: '/api/likes/',
         facebookSignIn: '/api/auth/fblogin',
-        auth: '/api/auth/'
+        auth: '/api/auth/',
+        poems: '/api/poems/'
     },
 
     size: {
-        text: 16
+        text: 16,
+        bottomBar: 50
     },
 
     colors: {

@@ -28,10 +28,11 @@ export function getList(page: number) {
     };
 }
 
-export function refreshFeed() {
+export function refreshFeed(options = {}) {
     return dispatch => {
         dispatch({
-            type: constants.FEED_LIST_REFRESH_REQUEST
+            type: constants.FEED_LIST_REFRESH_REQUEST,
+            payload: options
         });
 
         Model.getList(1)

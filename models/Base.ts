@@ -1,12 +1,13 @@
 import Model from './Model';
-//import config from '../apps/common/config';
 
 class BaseModel extends Model {
-    constructor(private url: string) {
+    url: string;
+    constructor(url: string) {
         super();
+        this.url = url;
     }
 
-    getList(page: number, filters = {}) {
+    getList(page: number) {
         //const offset = (page - 1) * config.listLimit;
         //let filtersStr = '';
 
@@ -19,7 +20,7 @@ class BaseModel extends Model {
         return new Promise((resolve, reject) => {
             this.request({
                 type: 'GET',
-                url: this.url
+                url: `${this.url}?page=${page}`
             })
                 .then(r => {
                     resolve(r);
@@ -35,6 +36,22 @@ class BaseModel extends Model {
             this.request({
                 type: 'GET',
                 url: `${this.url}${id}/`
+            })
+                .then(r => {
+                    resolve(r);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+    }
+
+    createItem(data) {
+        return new Promise((resolve, reject) => {
+            this.request({
+                type: 'POST',
+                url: this.url,
+                data
             })
                 .then(r => {
                     resolve(r);
