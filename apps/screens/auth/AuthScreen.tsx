@@ -4,10 +4,11 @@ import { View, Button } from 'react-native';
 import * as Facebook from 'expo-facebook';
 import { NavigationScreenProp } from 'react-navigation';
 import { AsyncStorage } from 'react-native';
-import { facebookSignUp } from '../../../actions/user';
+import { facebookSignUp, auth } from '../../../actions/user';
 
 interface Props {
     facebookSignUp: any;
+    auth: any;
     navigation: NavigationScreenProp<any, any>;
 }
 
@@ -16,6 +17,7 @@ class AuthScreen extends Component<Props> {
         const token = await AsyncStorage.getItem('token');
 
         if (token) {
+            this.props.auth();
             this.props.navigation.navigate('Feed');
         }
 
@@ -49,5 +51,5 @@ class AuthScreen extends Component<Props> {
 
 export default connect(
     null,
-    { facebookSignUp }
+    { facebookSignUp, auth }
 )(AuthScreen);

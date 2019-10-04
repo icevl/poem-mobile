@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View } from 'react-native';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { NavigationScreenProp } from 'react-navigation';
 import styles from './BottomBar.style';
 import BottomBarButton from './BottomBarButton';
@@ -10,28 +10,25 @@ interface Props {
     user?: any;
 }
 
-class BottomBar extends React.Component<Props> {
-    setScreen(screen: string) {
-        this.props.navigation.navigate(screen);
-    }
+const BottomBar = (props: Props) => {
+    const user = useSelector((state: any) => state.user);
 
-    render() {
-        return (
-            <View style={styles.container}>
-                <BottomBarButton icon='calendar' onPress={this.setScreen.bind(this, 'Feed')} isActive />
-                <BottomBarButton icon='search' />
-                <BottomBarButton icon='plus' />
-                <BottomBarButton icon='envelope' />
-                <BottomBarButton icon='user' onPress={this.setScreen.bind(this, 'Menu')} />
-            </View>
-        );
-    }
-}
+    useEffect(() => {
+        console.log('user', user);
+    }, [user]);
 
-const mapStateToProps = (state: any) => {
-    return {
-        user: state.user
+    const setScreen = (screen: string) => {
+        props.navigation.navigate(screen);
     };
-};
 
-export default connect(mapStateToProps)(BottomBar);
+    return (
+        <View style={styles.container}>
+            <BottomBarButton icon='calendar' onPress={() => setScreen('Feed')} isActive />
+            <BottomBarButton icon='search' />
+            <BottomBarButton icon='plus' />
+            <BottomBarButton icon='envelope' />
+            <BottomBarButton icon='user' onPress={() => setScreen('Menu')} />
+        </View>
+    );
+};
+export default BottomBar;

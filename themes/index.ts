@@ -10,7 +10,7 @@ themes['ice'] = Ice;
 themes['Black and white'] = BW;
 
 export default function Theme(): ThemeUI {
-    const selectedTheme = 'ice';
+    const selectedTheme = 'Black and white';
 
     if (themes[selectedTheme] != undefined) {
         return themes[selectedTheme];

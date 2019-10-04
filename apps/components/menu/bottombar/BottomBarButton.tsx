@@ -6,7 +6,7 @@ import styles from './BottomBarButton.style';
 interface Props {
     icon: string;
     isActive?: boolean;
-    onPress?: () => void;
+    onPress?: any;
 }
 
 export default class BottomBarButton extends Component<Props> {

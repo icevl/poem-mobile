@@ -1,37 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import * as Font from 'expo-font';
 
 interface Props {
     children: React.ReactNode;
-    actions: any;
-    isFontLoaded: boolean;
 }
 
-interface State {
-    isFontsLoaded: boolean;
-}
+const AppContainer = (props: Props) => {
+    const [isFontsLoaded, setIsFontsLoaded] = useState<Boolean>(false);
+    const user = useSelector((state: any) => state.user);
 
-export default class AppContainer extends React.Component<Props, State> {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isFontsLoaded: false
-        };
-    }
-
-    async componentDidMount() {
+    const loadFonts = async () => {
         await Font.loadAsync({
             Electrolize: require('./assets/fonts/Electrolize.ttf'),
             Nautilus: require('./assets/fonts/Nautilus.otf')
         });
 
-        this.setState({ isFontsLoaded: true });
-    }
-    render() {
-        if (!this.state.isFontsLoaded) {
-            return null;
-        }
+        setIsFontsLoaded(true);
+    };
 
-        return this.props.children;
-    }
-}
+    useEffect(() => {
+        loadFonts();
+    }, [isFontsLoaded]);
+
+    useEffect(() => {
+        // console.log('user', user);
+    }, [user]);
+
+    return isFontsLoaded ? props.children : null;
+};
+export default AppContainer;

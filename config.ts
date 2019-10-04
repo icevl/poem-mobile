@@ -5,7 +5,8 @@ export default {
         weapons: '/weapons/',
         feed: '/api/feed/',
         likes: '/api/likes/',
-        facebookSignIn: '/api/auth/fblogin'
+        facebookSignIn: '/api/auth/fblogin',
+        auth: '/api/auth/'
     },
 
     size: {

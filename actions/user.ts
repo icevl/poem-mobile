@@ -30,3 +30,22 @@ export function facebookSignUp(token: string, navigation: NavigationScreenProp<a
             });
     };
 }
+
+export function auth() {
+    return dispatch => {
+        Model.auth()
+            .then((r: any) => {
+                if (r.id) {
+                    dispatch({
+                        type: constants.USER_SIGN_IN_SUCCESS,
+                        payload: r
+                    });
+                }
+            })
+            .catch(() => {
+                dispatch({
+                    type: constants.USER_SIGN_IN_FAIL
+                });
+            });
+    };
+}

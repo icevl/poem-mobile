@@ -1,21 +1,16 @@
 import 'moment/locale/ru';
 
-import React, { Component } from 'react';
+import React from 'react';
 import { Text } from 'react-native';
 import moment from 'moment';
 import { CurrentLocale } from '../../../language/index';
+moment.locale(CurrentLocale());
 
 interface Props {
     date: Date;
     style?: any;
 }
 
-export default class Time extends Component<Props> {
-    constructor(props) {
-        super(props);
-        moment.locale(CurrentLocale());
-    }
-    render() {
-        return <Text style={this.props.style}>{moment(this.props.date).format('LLL')}</Text>;
-    }
-}
+const Time = (props: Props) => <Text style={props.style}>{moment(props.date).format('LLL')}</Text>;
+
+export default Time;
