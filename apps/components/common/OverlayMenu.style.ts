@@ -4,9 +4,10 @@ export default EStyleSheet.create({
     overlay: {
         position: 'absolute',
         top: 0,
+        left: 0,
         flex: 1,
         zIndex: 3,
-        backgroundColor: 'rgba(00, 00, 00, 0.5)',
+        backgroundColor: 'rgba(00, 00, 00, 0.6)',
         width: '100%',
         height: '100%'
     },

@@ -105,10 +105,10 @@ class App extends React.Component<Props, State> {
         );
         const NavApp = createAppContainer(AppNavigator);
         return (
-            <React.Fragment>
+            <View style={styles.mainContainer}>
                 <OverlayMenu />
                 <NavApp />
-            </React.Fragment>
+            </View>
         );
     }
 }
