@@ -20,6 +20,9 @@ export default function getLocaleString(word: string): string {
 }
 
 export function getLocale(): string {
+    if (current === 'cn') {
+        current = 'ru';
+    }
     return current;
 }
 
