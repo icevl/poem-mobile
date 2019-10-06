@@ -1,5 +1,5 @@
 import 'moment/locale/ru';
-import 'moment/locale/zh-cn';
+// import 'moment/locale/zh-cn';
 
 import React from 'react';
 import { Text } from 'react-native';
