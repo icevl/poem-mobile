@@ -19,3 +19,20 @@ export function setStatusbarColor(color: string) {
         });
     };
 }
+
+export function showOverlayMenu(menu: any) {
+    return dispatch => {
+        dispatch({
+            type: constants.APPLICATION_OVERLAY_MENU_SET,
+            payload: menu
+        });
+    };
+}
+
+export function closeOverlayMenu() {
+    return dispatch => {
+        dispatch({
+            type: constants.APPLICATION_OVERLAY_MENU_CLOSE
+        });
+    };
+}

@@ -3,9 +3,17 @@ import { Platform, TouchableNativeFeedback, TouchableOpacity } from 'react-nativ
 
 const TouchComponent = Platform.OS === 'ios' ? TouchableOpacity : TouchableNativeFeedback;
 
-export default class Touch extends Component {
+interface Props {
+    onPress?: any;
+}
+
+export default class Touch extends Component<Props> {
     render() {
         //@ts-ignore
-        return <TouchComponent>{this.props.children}</TouchComponent>;
+        return (
+            <TouchComponent onPress={this.props.onPress ? this.props.onPress.bind(this) : null}>
+                {this.props.children}
+            </TouchComponent>
+        );
     }
 }

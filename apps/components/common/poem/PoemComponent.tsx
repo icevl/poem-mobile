@@ -2,25 +2,42 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Image } from 'react-native-expo-image-cache';
+import Icon from 'react-native-vector-icons/Feather';
 import { Poem } from '../../../../interfaces/poem';
 import getLocaleString from '../../../../locale/index';
 import styles from './PoemComponent.style';
 import Touch from '../../../components/common/Touch';
 import PoemButton from './PoemButton';
-import { update } from '../../../../actions/poem';
+import { update, removePoem } from '../../../../actions/poem';
 import LikeModel from '../../../../models/LikeModel';
 import Time from '../../../components/common/Time';
 import Card from '../Card';
+import { showOverlayMenu } from '../../../../actions/application';
+import { buildPoemArray } from '../../../../helpers/poem';
 
 interface Props {
     item: Poem;
     user?: any;
     update?: any;
+    showOverlayMenu?: (menu: any) => void;
+    removePoem?: (poem: Poem) => void;
 }
 
-class PoemComponent extends Component<Props> {
+interface State {
+    isShowMore: boolean;
+}
+
+class PoemComponent extends Component<Props, State> {
+    shortTextLines: number;
+    likeModel: any;
+
     constructor(props) {
         super(props);
+        this.state = {
+            isShowMore: false
+        };
+
+        this.shortTextLines = 12;
         this.likeModel = new LikeModel();
     }
     getDedicateItem(): React.ReactNode {
@@ -53,11 +70,47 @@ class PoemComponent extends Component<Props> {
         this.props.update(poem);
     }
 
+    openContext() {
+        const onRemove = () => {
+            this.props.removePoem(this.props.item);
+        };
+
+        const menu = {
+            items: [
+                {
+                    title: getLocaleString('remove_poem'),
+                    description: getLocaleString('remove_poem_description'),
+                    icon: 'delete-outline',
+                    onClick: onRemove
+                }
+            ]
+        };
+        this.props.showOverlayMenu(menu);
+    }
+
+    toggleMoreButton() {
+        const text = this.state.isShowMore ? 'Hide' : 'Show more';
+        return (
+            <Touch onPress={this.toggleMore.bind(this)}>
+                <View>
+                    <Text>{text}</Text>
+                </View>
+            </Touch>
+        );
+    }
+
+    toggleMore() {
+        this.setState({ isShowMore: !this.state.isShowMore });
+    }
+
     render() {
         const isLiked = this.props.item.likes.reduce(
             (acc, like) => (like.user_id === this.props.user.id ? true : acc),
             false
         );
+
+        const poemArray = buildPoemArray(this.props.item.content);
+
         return (
             <Card>
                 <View style={styles.authorRow}>
@@ -68,29 +121,30 @@ class PoemComponent extends Component<Props> {
                         <Text style={styles.authorName}>{this.props.item.user.name}</Text>
                         <Time style={styles.time} date={this.props.item.created_at} />
                     </View>
-                    <View style={styles.contextMenuWrapper}></View>
+                    <View style={styles.contextMenuWrapper}>
+                        {this.props.user.id === this.props.item.user.id && (
+                            <Touch onPress={this.openContext.bind(this)}>
+                                <Icon name='more-horizontal' size={30} style={styles.moreButton} />
+                            </Touch>
+                        )}
+                    </View>
                 </View>
                 <View style={styles.contentWrapper}>
                     <Text style={styles.title}>{this.props.item.title}</Text>
-                    <Text style={styles.text}>
-                        {this.props.item.content}
-                        {/* Октябрь уж наступил — уж роща отряхает{'\n'}
-                        Последние листы с нагих своих ветвей;{'\n'}
-                        Дохнул осенний хлад — дорога промерзает.{'\n'}
-                        Журча еще бежит за мельницу ручей,{'\n'}
-                        Но пруд уже застыл; сосед мой поспешает{'\n'}В отъезжие поля с охотою своей,{'\n'}И страждут
-                        озими от бешеной забавы,{'\n'}И будит лай собак уснувшие дубравы.{'\n'}
-                        {'\n'}
-                        {'\n'}
-                        Теперь моя пора: я не люблю весны;{'\n'}
-                        Скучна мне оттепель; вонь, грязь — весной я болен;{'\n'}
-                        Кровь бродит; чувства, ум тоскою стеснены.{'\n'}
-                        Суровою зимой я более доволен,{'\n'}
-                        Люблю ее снега; в присутствии луны{'\n'}
-                        Как легкий бег саней с подругой быстр и волен,{'\n'}
-                        Когда под соболем, согрета и свежа,{'\n'}
-                        Она вам руку жмет, пылая и дрожа! */}
-                    </Text>
+
+                    {poemArray.length <= this.shortTextLines || this.state.isShowMore ? (
+                        <React.Fragment>
+                            <Text style={styles.text}>{poemArray.map(line => `${line}\n`)}</Text>
+                            {this.state.isShowMore && this.toggleMoreButton()}
+                        </React.Fragment>
+                    ) : (
+                        <React.Fragment>
+                            <Text style={styles.text}>
+                                {poemArray.slice(0, this.shortTextLines).map(line => `${line}\n`)}
+                            </Text>
+                            {this.toggleMoreButton()}
+                        </React.Fragment>
+                    )}
                 </View>
 
                 {this.props.item.dedicate_to && this.props.item.dedicate_to.length > 0 && (
@@ -132,5 +186,5 @@ const mapStateToProps = (state: any) => {
 
 export default connect(
     mapStateToProps,
-    { update }
+    { update, showOverlayMenu, removePoem }
 )(PoemComponent);

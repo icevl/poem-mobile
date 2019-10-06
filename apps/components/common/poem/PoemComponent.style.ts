@@ -5,19 +5,19 @@ import config from '../../../../config';
 export default EStyleSheet.create({
     authorRow: {
         flexDirection: 'row',
-        height: 50
+        height: 30
     },
 
     avatarWrapper: {
         flexDirection: 'column',
-        width: 50,
-        borderRadius: 25,
+        width: 30,
+        borderRadius: 15,
         overflow: 'hidden'
     },
 
     avatar: {
-        width: 50,
-        height: 50
+        width: 30,
+        height: 30
     },
 
     authorWrapper: {
@@ -50,8 +50,8 @@ export default EStyleSheet.create({
         marginTop: 14,
         borderRadius: 10,
         width: '100%',
-        padding: 10,
-        backgroundColor: '$poemBackground'
+        padding: 0
+        // backgroundColor: '$poemBackground'
     },
 
     title: {
@@ -114,5 +114,10 @@ export default EStyleSheet.create({
         width: 80,
         flexDirection: 'column',
         justifyContent: 'center'
+    },
+
+    moreButton: {
+        color: '$cardText',
+        opacity: 0.5
     }
 });

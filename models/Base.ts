@@ -77,6 +77,21 @@ class BaseModel extends Model {
                 });
         });
     }
+
+    removeItem(id: number) {
+        return new Promise((resolve, reject) => {
+            this.request({
+                type: 'DELETE',
+                url: `${this.url}${id}/`
+            })
+                .then(r => {
+                    resolve(r);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+    }
 }
 
 export default BaseModel;

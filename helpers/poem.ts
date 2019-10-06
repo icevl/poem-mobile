@@ -17,4 +17,20 @@ function updatePoemList(currentList, newList) {
     return currentList.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 }
 
-export { updatePoemList };
+function buildPoemArray(text: string) {
+    let lines = text
+        .trim()
+        .split('\n')
+        .reduce((acc, el) => [...acc, el.trim()], []);
+
+    /**
+     * Removing extra space between strophes
+     */
+    lines = lines
+        .map((line, index) => (index === 0 || line !== '' || (line === '' && lines[index - 1] !== '') ? line : null))
+        .filter(el => el !== null);
+
+    return lines;
+}
+
+export { updatePoemList, buildPoemArray };

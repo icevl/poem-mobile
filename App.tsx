@@ -8,6 +8,7 @@ import { StyleSheet } from 'react-native';
 import AppMain from './AppMain';
 import StatusBar from './apps/components/menu/StatusBar';
 import AppContainer from './AppContainer';
+
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const reducer = combineReducers(reducers);
 const store = createStoreWithMiddleware(reducer);

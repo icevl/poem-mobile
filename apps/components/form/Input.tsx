@@ -28,7 +28,7 @@ const Input = (props: Props) => {
                     onChangeText={onChangeText}
                     value={value}
                     textAlignVertical={!!numberOfLines ? 'top' : 'center'}
-                    maxLength={1000}
+                    // maxLength={1000}
                 />
             </View>
         </View>

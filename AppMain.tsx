@@ -15,6 +15,7 @@ import { getFeedFromLocal } from './actions/feed';
 import styles from './AppMain.style';
 import { getTheme } from './themes/index';
 import { setLocale } from './locale/index';
+import OverlayMenu from './apps/components/common/OverlayMenu';
 
 interface Props {
     auth: () => void;
@@ -103,7 +104,12 @@ class App extends React.Component<Props, State> {
             }
         );
         const NavApp = createAppContainer(AppNavigator);
-        return <NavApp />;
+        return (
+            <React.Fragment>
+                <OverlayMenu />
+                <NavApp />
+            </React.Fragment>
+        );
     }
 }
 

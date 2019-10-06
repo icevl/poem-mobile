@@ -2,7 +2,9 @@ import constants from '../constants/application';
 
 const initialState = {
     isShow: true,
-    statusBarColor: ''
+    statusBarColor: '',
+
+    overlayMenu: {}
 };
 
 export default function application(state = initialState, action) {
@@ -23,6 +25,18 @@ export default function application(state = initialState, action) {
             return {
                 ...state,
                 statusBarColor: action.payload
+            };
+
+        case constants.APPLICATION_OVERLAY_MENU_SET:
+            return {
+                ...state,
+                overlayMenu: action.payload
+            };
+
+        case constants.APPLICATION_OVERLAY_MENU_CLOSE:
+            return {
+                ...state,
+                overlayMenu: {}
             };
 
         default:

@@ -5,5 +5,7 @@ export default {
     public_verb: '发送',
     dedicate_to: '致力于',
     poem_title: '职称',
-    poem_content: '诗歌文字'
+    poem_content: '诗歌文字',
+    remove_poem: 'Remove',
+    remove_poem_description: 'Poem will remove from feed'
 };

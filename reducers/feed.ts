@@ -56,6 +56,12 @@ export default function feed(state = initialState, action) {
                 )
             };
 
+        case constantsPoem.POEM_REMOVE_REQUEST:
+            return {
+                ...state,
+                items: state.items.reduce((acc, poem) => (poem.id === action.payload.id ? acc : [...acc, poem]), [])
+            };
+
         /** REFRESH */
 
         case constants.FEED_LIST_REFRESH_REQUEST:
