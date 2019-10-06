@@ -10,6 +10,7 @@ import MenuScreen from './apps/screens/menu/Menu';
 import AuthScreen from './apps/screens/auth/AuthScreen';
 import PoemFormScreen from './apps/screens/poem/form/PoemFormScreen';
 import { auth } from './actions/user';
+import { setStatusbarColor } from './actions/application';
 import { getFeedFromLocal } from './actions/feed';
 import styles from './AppMain.style';
 import { getTheme } from './themes/index';
@@ -18,6 +19,7 @@ import { setLocale } from './locale/index';
 interface Props {
     auth: () => void;
     getFeedFromLocal?: () => void;
+    setStatusbarColor?: (color: string) => void;
     isShow?: boolean;
 }
 
@@ -53,9 +55,25 @@ class App extends React.Component<Props, State> {
         }
 
         const theme = storedTheme ? storedTheme : 'dark';
-        EStyleSheet.build(getTheme(theme));
+        const themeData = getTheme(theme);
+        EStyleSheet.build(themeData);
+
+        this.props.setStatusbarColor(themeData['$navbarBackground']);
 
         this.setState({ isReady: true, initialRouteName });
+    }
+
+    async componentDidUpdate(prevProps) {
+        if (!prevProps.isShow && this.props.isShow) {
+            const storedTheme = await AsyncStorage.getItem('theme');
+
+            if (!storedTheme) {
+                return false;
+            }
+
+            const themeData = getTheme(storedTheme);
+            this.props.setStatusbarColor(themeData['$navbarBackground']);
+        }
     }
 
     render() {
@@ -97,5 +115,5 @@ const mapStateToProps = (state: any) => {
 
 export default connect(
     mapStateToProps,
-    { auth, getFeedFromLocal }
+    { auth, getFeedFromLocal, setStatusbarColor }
 )(App);

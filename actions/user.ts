@@ -49,3 +49,12 @@ export function auth() {
             });
     };
 }
+
+export function setAuth(data) {
+    return dispatch => {
+        dispatch({
+            type: constants.USER_SIGN_IN_SUCCESS,
+            payload: data
+        });
+    };
+}

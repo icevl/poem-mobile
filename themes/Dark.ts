@@ -8,8 +8,8 @@ export default {
     $bottombarText: '#fff',
     $bottombarActive: '#1f89c4',
     $background: '#181617',
-    $cardBackground: '#071f2e',
+    $cardBackground: '#1f3f4e',
     $cardText: '#ffffff',
     $cardBorder: 'transparent',
-    $poemBackground: '#203340'
+    $poemBackground: '#253849'
 };

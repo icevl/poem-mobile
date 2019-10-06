@@ -1,7 +1,8 @@
 import constants from '../constants/application';
 
 const initialState = {
-    isShow: true
+    isShow: true,
+    statusBarColor: ''
 };
 
 export default function application(state = initialState, action) {
@@ -16,6 +17,12 @@ export default function application(state = initialState, action) {
             return {
                 ...state,
                 isShow: false
+            };
+
+        case constants.APPLICATION_SET_STATUSBAR_COLOR:
+            return {
+                ...state,
+                statusBarColor: action.payload
             };
 
         default:

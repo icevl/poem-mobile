@@ -10,3 +10,12 @@ export function refreshApplication() {
         });
     };
 }
+
+export function setStatusbarColor(color: string) {
+    return dispatch => {
+        dispatch({
+            type: constants.APPLICATION_SET_STATUSBAR_COLOR,
+            payload: color
+        });
+    };
+}

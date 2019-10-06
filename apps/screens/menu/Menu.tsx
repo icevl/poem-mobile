@@ -11,11 +11,11 @@ import getLocaleString, { setLocale } from '../../../locale/index';
 import { refreshApplication } from '../../../actions/application';
 import BottomBar from '../../components/menu/bottombar/BottomBar';
 import Content from '../../components/content/Content';
+import MenuUserSwitch from './MenuUserSwitch';
 
 interface Props {
     navigation: NavigationScreenProp<any, any>;
     refreshApplication?: () => void;
-    accountUsers: any;
 }
 
 class Menu extends React.Component<Props> {
@@ -35,15 +35,12 @@ class Menu extends React.Component<Props> {
     }
 
     render() {
-        console.log('Users', this.props.accountUsers);
         return (
             <Content>
                 <NavBar navigation={this.props.navigation} />
                 <ScrollView>
                     <MenuBlock>
                         <MenuLink title={getLocaleString('feed')} screen='Feed' icon='group' />
-                        {/* <MenuLink title='News' screen='Feed' icon='new-releases' />
-                    <MenuLink title='Clans' screen='Feed' icon='group' /> */}
                         <MenuLink
                             title={getLocaleString('logout')}
                             onPress={this.logOut.bind(this)}
@@ -66,6 +63,8 @@ class Menu extends React.Component<Props> {
                         <MenuLink title='English' onPress={this.onSetLanguage.bind(this, 'en')} icon='announcement' />
                         <MenuLink title='中文' onPress={this.onSetLanguage.bind(this, 'cn')} icon='announcement' />
                     </MenuBlock>
+
+                    <MenuUserSwitch />
                 </ScrollView>
                 <BottomBar navigation={this.props.navigation} />
             </Content>
@@ -73,13 +72,7 @@ class Menu extends React.Component<Props> {
     }
 }
 
-const mapStateToProps = (state: any) => {
-    return {
-        accountUsers: state.user.accountUsers
-    };
-};
-
 export default connect(
-    mapStateToProps,
+    null,
     { refreshApplication }
 )(Menu);

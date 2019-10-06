@@ -23,6 +23,7 @@ export function getLocale(): string {
     if (current === 'cn') {
         current = 'ru';
     }
+
     return current;
 }
 

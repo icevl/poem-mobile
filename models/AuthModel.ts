@@ -34,6 +34,24 @@ class AuthModel extends Model {
                 });
         });
     }
+
+    getUser(id: number) {
+        return new Promise((resolve, reject) => {
+            this.request({
+                type: 'POST',
+                url: `${config.paths.auth}get`,
+                data: {
+                    id
+                }
+            })
+                .then(r => {
+                    resolve(r);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+    }
 }
 
 export default AuthModel;
