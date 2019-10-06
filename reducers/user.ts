@@ -2,7 +2,8 @@ import constants from '../constants/user';
 
 const initialState = {
     id: null,
-    login: ''
+    login: '',
+    accountUsers: []
 };
 
 export default function user(state = initialState, action) {
@@ -18,7 +19,8 @@ export default function user(state = initialState, action) {
             return {
                 ...state,
                 id: action.payload.id,
-                login: action.payload.login
+                login: action.payload.login,
+                accountUsers: action.payload.account_users
             };
 
         default:

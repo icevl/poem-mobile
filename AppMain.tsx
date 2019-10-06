@@ -76,7 +76,12 @@ class App extends React.Component<Props, State> {
                 navigationOptions: {
                     header: null,
                     headerVisible: false
-                }
+                },
+                transitionConfig: () => ({
+                    transitionSpec: {
+                        duration: 0 // Set the animation duration time as 0 !!
+                    }
+                })
             }
         );
         const NavApp = createAppContainer(AppNavigator);

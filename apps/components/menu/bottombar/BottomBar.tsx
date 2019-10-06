@@ -15,7 +15,7 @@ const BottomBar = (props: Props) => {
     const currentScreen = props.navigation.state.routeName;
 
     useEffect(() => {
-        console.log('user', user);
+        // console.log('user', user.id);
     }, [user]);
 
     const setScreen = (screen: string) => {
@@ -32,7 +32,7 @@ const BottomBar = (props: Props) => {
                 isActive={currentScreen === 'PoemForm'}
             />
             <BottomBarButton icon='envelope' />
-            <BottomBarButton icon='user' onPress={() => setScreen('Menu')} />
+            <BottomBarButton icon='user' />
         </View>
     );
 };
