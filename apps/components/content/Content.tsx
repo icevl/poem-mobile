@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
-import Theme from '../../../themes/index';
+import { View } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
-const theme = Theme();
-
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
     content: {
-        backgroundColor: theme.color.background,
+        backgroundColor: '$background',
         flex: 1
     }
 });

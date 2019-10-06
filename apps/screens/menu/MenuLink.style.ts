@@ -1,20 +1,19 @@
-import { StyleSheet } from 'react-native';
-import config from '../../../config';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
-export default StyleSheet.create({
+export default EStyleSheet.create({
     content: {
         flexDirection: 'row',
         marginLeft: 20,
         marginRight: 20,
         marginTop: 13,
-        marginBottom: 13
+        marginBottom: 13,
+        opacity: 0.8
     },
 
     text: {
         marginLeft: 18,
-        color: config.colors.normalText,
-        fontSize: 22,
-        fontWeight: 'bold'
+        color: '$cardText',
+        fontSize: 18
     },
 
     icon: {

@@ -1,18 +1,15 @@
-import { StyleSheet } from 'react-native';
-import Theme from '../../../../themes';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import config from '../../../../config';
 
-const theme = Theme();
-
-export default StyleSheet.create({
+export default EStyleSheet.create({
     container: {
         position: 'absolute',
         bottom: 0,
         width: '100%',
         height: config.size.bottomBar,
-        backgroundColor: theme.color.bottombarBackground,
+        backgroundColor: '$bottombarBackground',
         flexDirection: 'row',
         borderTopWidth: 1,
-        borderTopColor: theme.color.bottombarBorder
+        borderTopColor: '$bottombarBorder'
     }
 });

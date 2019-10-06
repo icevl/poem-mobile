@@ -11,11 +11,17 @@ interface Props {
 
 const Input = (props: Props) => {
     const { placeholder, numberOfLines, onChangeText, value } = props;
+
+    const inputStyles = { ...styles.input };
+    if (numberOfLines) {
+        inputStyles.height = numberOfLines * 20;
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.inputWrapper}>
                 <TextInput
-                    style={styles.input}
+                    style={inputStyles}
                     placeholder={placeholder}
                     numberOfLines={numberOfLines}
                     multiline={!!numberOfLines}

@@ -21,7 +21,7 @@ class MenuLink extends Component<Props> {
     }
 
     render() {
-        const textStyle: any = { ...styles.text, fontFamily: 'Electrolize' };
+        const textStyle: any = { ...styles.text };
         return (
             <TouchComponent
                 onPress={

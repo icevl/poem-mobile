@@ -12,9 +12,9 @@ export function facebookSignUp(token: string, navigation: NavigationScreenProp<a
         });
 
         Model.facebookAuth(token)
-            .then((r: any) => {
+            .then(async (r: any) => {
                 if (r.token) {
-                    AsyncStorage.setItem('token', r.token);
+                    await AsyncStorage.setItem('token', r.token);
 
                     navigation.navigate('Feed');
                     dispatch({

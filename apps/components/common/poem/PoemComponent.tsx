@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Image } from 'react-native-expo-image-cache';
 import { Poem } from '../../../../interfaces/poem';
-import Phrase from '../../../../language/index';
+import getLocaleString from '../../../../locale/index';
 import styles from './PoemComponent.style';
 import Touch from '../../../components/common/Touch';
 import PoemButton from './PoemButton';
@@ -95,20 +95,29 @@ class PoemComponent extends Component<Props> {
 
                 {this.props.item.dedicate_to && this.props.item.dedicate_to.length > 0 && (
                     <View style={styles.dedicateToWrapper}>
-                        <Text style={styles.dedicateTo}>{Phrase('dedicate_to')}:</Text>
+                        <Text style={styles.dedicateTo}>{getLocaleString('dedicate_to')}:</Text>
                         <View style={styles.dedicateToLinksWrapper}>{this.getDedicateItem()}</View>
                     </View>
                 )}
 
                 <View style={styles.buttonsWrapper}>
-                    <PoemButton
-                        isActive={isLiked}
-                        icon={isLiked ? 'heart' : 'heart-outline'}
-                        value={this.props.item.likes_count.toString()}
-                        onPress={this.toggleLike.bind(this, isLiked)}
-                    />
-                    <PoemButton icon='comment-outline' value={this.props.item.comments_count.toString()} />
-                    <PoemButton icon='eye-outline' value={this.props.item.views_count.toString()} />
+                    <View style={styles.buttonsAction}>
+                        <View style={styles.buttonsActionWrapper}>
+                            <PoemButton
+                                isActive={isLiked}
+                                icon={isLiked ? 'heart' : 'heart-outline'}
+                                value={this.props.item.likes_count.toString()}
+                                onPress={this.toggleLike.bind(this, isLiked)}
+                            />
+                            <PoemButton icon='comment-outline' value={this.props.item.comments_count.toString()} />
+                        </View>
+                    </View>
+
+                    <View style={styles.buttonsInfo}>
+                        <View style={styles.buttonsInfoWrapper}>
+                            <PoemButton icon='eye-outline' value={this.props.item.views_count.toString()} small />
+                        </View>
+                    </View>
                 </View>
             </Card>
         );

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { ScrollView, Text, Button } from 'react-native';
+import { ScrollView, Button } from 'react-native';
 import { NavigationScreenProp, withNavigationFocus } from 'react-navigation';
 import Content from '../../../components/content/Content';
 import NavBar from '../../../components/menu/navbar/NavBar';
-import Phrase from '../../../../language/index';
+import getLocaleString from '../../../../locale/index';
 import BottomBar from '../../../components/menu/bottombar/BottomBar';
 import Card from '../../../components/common/Card';
 import Input from '../../../components/form/Input';
@@ -25,6 +25,7 @@ const PoemFormScreen = (props: Props) => {
 
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const isValid = () => {
         return content !== '';
@@ -36,32 +37,46 @@ const PoemFormScreen = (props: Props) => {
             content: content.trim()
         };
 
+        setIsLoading(true);
+
         const response: PoemResponse = await model.createItem(data);
+        setIsLoading(false);
+
         if (response.id) {
             navigation.navigate('Feed');
         }
-
-        console.log('HI!', data);
     };
+
+    const button = (
+        <Button
+            title={getLocaleString('public_verb')}
+            disabled={!isValid() || isLoading}
+            onPress={() => publicPoem()}
+        />
+    );
 
     return (
         <Content>
-            <NavBar title={Phrase('public_poem')} navigation={navigation} />
+            <NavBar title={getLocaleString('public_poem')} navigation={navigation} rightButton={button} />
             <ScrollView style={styles.scrollView}>
                 <Card>
-                    <Input placeholder='Название стихотворения' value={title} onChangeText={value => setTitle(value)} />
+                    <Input
+                        placeholder={getLocaleString('poem_title')}
+                        value={title}
+                        onChangeText={value => setTitle(value)}
+                    />
                 </Card>
 
                 <Card>
                     <Input
-                        placeholder='Текст'
+                        placeholder={getLocaleString('poem_content')}
                         value={content}
                         onChangeText={value => setContent(value)}
                         numberOfLines={12}
                     />
                 </Card>
 
-                <Card>
+                {/* <Card>
                     <Text>123</Text>
                 </Card>
 
@@ -71,11 +86,7 @@ const PoemFormScreen = (props: Props) => {
 
                 <Card>
                     <Text>123</Text>
-                </Card>
-
-                <Card>
-                    <Button title='PUBLIC' disabled={!isValid()} onPress={() => publicPoem()} />
-                </Card>
+                </Card> */}
             </ScrollView>
             <BottomBar navigation={navigation} />
         </Content>

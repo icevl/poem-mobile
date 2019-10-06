@@ -1,9 +1,6 @@
-import { StyleSheet } from 'react-native';
-import Theme from '../../../../themes';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
-const theme = Theme();
-
-export default StyleSheet.create({
+export default EStyleSheet.create({
     container: {
         flexDirection: 'column',
         justifyContent: 'center',
@@ -12,13 +9,13 @@ export default StyleSheet.create({
     },
 
     icon: {
-        color: theme.color.bottombarText,
+        color: '$bottombarText',
         textAlign: 'center',
         fontWeight: 'normal'
     },
 
     active: {
-        color: theme.color.bottombarActive,
+        color: '$bottombarActive',
         opacity: 0.9
     }
 });

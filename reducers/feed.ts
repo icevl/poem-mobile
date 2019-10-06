@@ -77,6 +77,16 @@ export default function feed(state = initialState, action) {
                 isRefreshLoading: false
             };
 
+        /**
+         * Load first page from local
+         */
+
+        case constants.FEED_LIST_LOCAL:
+            return {
+                ...state,
+                items: action.payload
+            };
+
         default:
             return state;
     }

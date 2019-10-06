@@ -5,11 +5,11 @@ import { NavigationScreenProp, withNavigationFocus } from 'react-navigation';
 import NavBar from '../../components/menu/navbar/NavBar';
 import BottomBar from '../../components/menu/bottombar/BottomBar';
 import Content from '../../components/content/Content';
-import Phrase from '../../../language/index';
+import getLocaleString from '../../../locale/index';
 import PoemComponent from '../../components/common/poem/PoemComponent';
 import { Poem } from 'interfaces/poem';
 import styles from './FeedScreen.style';
-import Loader from '../../components/common/Loader';
+// import Loader from '../../components/common/Loader';
 import { getList, refreshFeed } from '../../../actions/feed';
 
 interface Paginator {
@@ -25,7 +25,7 @@ interface Props {
     isRefreshLoading: boolean;
     navigation: NavigationScreenProp<any, any>;
     getList?: (id: number) => void;
-    refreshFeed?: (options: any) => void;
+    refreshFeed?: (options?: any) => void;
     isFocused?: boolean;
     paginator: Paginator;
 }
@@ -53,13 +53,14 @@ class FeedScreen extends React.Component<Props> {
             this.isCloseToBottom(nativeEvent) &&
             this.props.paginator.page < this.props.paginator.pages
         ) {
+            this.setState({ lastScrollPos: nativeEvent.contentOffset.y });
             const nextpage = this.props.paginator.page + 1;
             this.props.getList(nextpage);
         }
     }
 
     isCloseToBottom({ layoutMeasurement, contentOffset, contentSize }) {
-        return layoutMeasurement.height + contentOffset.y >= contentSize.height - 50;
+        return layoutMeasurement.height + contentOffset.y >= contentSize.height - 1000;
     }
 
     render() {
@@ -67,10 +68,11 @@ class FeedScreen extends React.Component<Props> {
 
         return (
             <Content>
-                <NavBar title={Phrase('feed')} navigation={navigation} />
-                <Loader isLoading={this.props.isLoading} />
+                <NavBar title={getLocaleString('feed')} navigation={navigation} />
+                {/* <Loader isLoading={this.props.isLoading && this.props.paginator.page === 1} /> */}
 
                 <ScrollView
+                    scrollEventThrottle={16}
                     ref={ref => (this.scrollRef = ref)}
                     style={styles.scrollView}
                     refreshControl={

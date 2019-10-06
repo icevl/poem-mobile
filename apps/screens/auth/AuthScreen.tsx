@@ -3,24 +3,15 @@ import { connect } from 'react-redux';
 import { View, Button } from 'react-native';
 import * as Facebook from 'expo-facebook';
 import { NavigationScreenProp } from 'react-navigation';
-import { AsyncStorage } from 'react-native';
-import { facebookSignUp, auth } from '../../../actions/user';
+import { facebookSignUp } from '../../../actions/user';
 
 interface Props {
     facebookSignUp: any;
-    auth: any;
     navigation: NavigationScreenProp<any, any>;
 }
 
 class AuthScreen extends Component<Props> {
-    async componentDidMount() {
-        const token = await AsyncStorage.getItem('token');
-
-        if (token) {
-            this.props.auth();
-            this.props.navigation.navigate('Feed');
-        }
-
+    componentDidMount() {
         // kabanov.mike@gmail.com
         // ice246246
     }
@@ -51,5 +42,5 @@ class AuthScreen extends Component<Props> {
 
 export default connect(
     null,
-    { facebookSignUp, auth }
+    { facebookSignUp }
 )(AuthScreen);

@@ -1,20 +1,18 @@
-import { StyleSheet } from 'react-native';
-import Theme from '../../../themes';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
-const theme = Theme();
-
-export default StyleSheet.create({
+export default EStyleSheet.create({
     container: {
         flexDirection: 'row',
         borderRadius: 5,
-        backgroundColor: theme.color.poemBackground,
+        backgroundColor: '$poemBackground',
         padding: 10
     },
 
-    inputWrapper: {},
+    inputWrapper: {
+        flex: 1
+    },
 
     input: {
-        backgroundColor: 'transparent',
-        color: theme.color.cardText
+        color: '$cardText'
     }
 });

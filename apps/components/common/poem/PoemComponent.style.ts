@@ -1,10 +1,8 @@
-import { StyleSheet } from 'react-native';
-import Theme from '../../../../themes';
+import { Dimensions } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import config from '../../../../config';
 
-const theme = Theme();
-
-export default StyleSheet.create({
+export default EStyleSheet.create({
     authorRow: {
         flexDirection: 'row',
         height: 50
@@ -30,14 +28,14 @@ export default StyleSheet.create({
     },
 
     authorName: {
-        color: theme.color.primary,
+        color: '$primary',
         fontSize: config.size.text
     },
 
     time: {
         position: 'relative',
         top: -3,
-        color: theme.color.cardText,
+        color: '$cardText',
         marginTop: 0,
         fontSize: config.size.text - 3,
         opacity: 0.5
@@ -53,18 +51,18 @@ export default StyleSheet.create({
         borderRadius: 10,
         width: '100%',
         padding: 10,
-        backgroundColor: theme.color.poemBackground
+        backgroundColor: '$poemBackground'
     },
 
     title: {
-        color: theme.color.primary,
+        color: '$primary',
         fontWeight: 'bold',
         paddingBottom: 5,
         fontSize: config.size.text
     },
 
     text: {
-        color: theme.color.cardText,
+        color: '$cardText',
         fontSize: config.size.text - 2
     },
 
@@ -76,7 +74,7 @@ export default StyleSheet.create({
 
     dedicateTo: {
         flexDirection: 'column',
-        color: theme.color.cardText,
+        color: '$cardText',
         fontSize: config.size.text - 4,
         opacity: 0.5
     },
@@ -89,11 +87,32 @@ export default StyleSheet.create({
 
     dedicateToLink: {
         fontSize: config.size.text - 4,
-        color: theme.color.primary
+        color: '$primary'
     },
 
     buttonsWrapper: {
-        marginTop: 14,
+        marginTop: 40,
         flexDirection: 'row'
+    },
+
+    buttonsAction: {
+        flexDirection: 'column',
+        justifyContent: 'center',
+        width: Dimensions.get('window').width - 80
+    },
+
+    buttonsActionWrapper: {
+        flexDirection: 'row'
+    },
+
+    buttonsInfoWrapper: {
+        flexDirection: 'row',
+        justifyContent: 'center'
+    },
+
+    buttonsInfo: {
+        width: 80,
+        flexDirection: 'column',
+        justifyContent: 'center'
     }
 });

@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import { View } from 'react-native';
-import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
     container: {
         width: '100%',
         marginTop: 7,
         paddingTop: 3,
         paddingBottom: 3,
-        backgroundColor: 'rgba(17, 18, 21, 0.6)'
+        backgroundColor: '$cardBackground'
     }
 });
 

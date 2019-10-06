@@ -1,32 +1,29 @@
-import { StyleSheet } from 'react-native';
-import Theme from '../../../../themes';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import config from '../../../../config';
 
-const theme = Theme();
-
-export default StyleSheet.create({
+export default EStyleSheet.create({
     container: {
         flexDirection: 'row',
-        justifyContent: 'center',
-        opacity: 0.2,
-        marginRight: 30
+        opacity: 0.3,
+        width: 70
     },
 
     icon: {
         flexDirection: 'column',
-        color: theme.color.cardText
+        color: '$cardText'
     },
 
     label: {
         flexDirection: 'column',
-        color: theme.color.cardText,
+        color: '$cardText',
         fontWeight: 'bold',
         fontSize: config.size.text,
-        marginLeft: 8
+        marginLeft: 8,
+        marginTop: 4
     },
 
     active: {
-        color: theme.color.primary,
+        color: '$primary',
         opacity: 0.9
     }
 });

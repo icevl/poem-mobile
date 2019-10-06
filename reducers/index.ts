@@ -1,5 +1,6 @@
+import application from './application';
 import feed from './feed';
 import navigation from './navigation';
 import user from './user';
 
-export { feed, navigation, user };
+export { application, feed, navigation, user };

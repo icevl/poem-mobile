@@ -1,14 +1,11 @@
-import { StyleSheet } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import { Platform } from 'react-native';
-import Theme from '../../../../themes';
 
-const theme = Theme();
-
-export default StyleSheet.create({
+export default EStyleSheet.create({
     container: {
         width: '100%',
         height: Platform.OS === 'ios' ? 60 : 53,
-        backgroundColor: theme.color.navbarBackground,
+        backgroundColor: '$navbarBackground',
         flexDirection: 'row',
         textAlign: 'center'
     },
@@ -16,7 +13,7 @@ export default StyleSheet.create({
     menuIcon: {
         // paddingTop: Platform.OS === 'ios' ? 18 : 15,
         // paddingLeft: 12,
-        color: theme.color.navbarText
+        color: '$navbarText'
         // opacity: 0.3
     },
 
@@ -37,7 +34,7 @@ export default StyleSheet.create({
 
     title: {
         fontFamily: 'Nautilus',
-        color: theme.color.navbarText,
+        color: '$navbarText',
         fontSize: 21,
         textAlign: 'center',
         opacity: 0.8

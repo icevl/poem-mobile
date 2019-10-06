@@ -10,6 +10,7 @@ interface Props {
     navigation: NavigationScreenProp<any, any>;
     title?: string;
     setNavigation: (navigation: NavigationScreenProp<any, any>) => void;
+    rightButton?: React.ReactNode;
 }
 
 class TopNavBar extends React.Component<Props> {
@@ -26,6 +27,7 @@ class TopNavBar extends React.Component<Props> {
     }
 
     render() {
+        const { rightButton } = this.props;
         return (
             <View>
                 <View style={styles.container}>
@@ -38,7 +40,11 @@ class TopNavBar extends React.Component<Props> {
                     </View>
 
                     <View style={styles.rightIconWrapper}>
-                        <Icon name='menu' size={24} style={styles.menuIcon} onPress={this.onShowMenu.bind(this)} />
+                        {!rightButton ? (
+                            <Icon name='menu' size={24} style={styles.menuIcon} onPress={this.onShowMenu.bind(this)} />
+                        ) : (
+                            rightButton
+                        )}
                     </View>
                 </View>
             </View>

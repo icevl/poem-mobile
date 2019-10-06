@@ -1,6 +1,8 @@
+import { AsyncStorage } from 'react-native';
 import BaseModel from '../models/Base';
 import constants from '../constants/feed';
 import config from '../config';
+import { Pagination } from 'interfaces/pagination';
 
 const Model = new BaseModel(config.paths.feed);
 
@@ -14,11 +16,15 @@ export function getList(page: number) {
         });
 
         Model.getList(page)
-            .then(r => {
+            .then((r: Pagination) => {
                 dispatch({
                     type: constants.FEED_LIST_SUCCESS,
                     payload: r
                 });
+
+                if (r.page === 1) {
+                    AsyncStorage.setItem('feed', JSON.stringify(r.results));
+                }
             })
             .catch(() => {
                 dispatch({
@@ -47,5 +53,25 @@ export function refreshFeed(options = {}) {
                     type: constants.FEED_LIST_REFRESH_FAIL
                 });
             });
+    };
+}
+
+export function getFeedFromLocal() {
+    return async dispatch => {
+        const localList = await AsyncStorage.getItem('feed');
+        let list = [];
+
+        if (localList) {
+            try {
+                list = JSON.parse(localList);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+
+        dispatch({
+            type: constants.FEED_LIST_LOCAL,
+            payload: list
+        });
     };
 }

@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
-import Theme from '../../../themes';
+import { View } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
-const theme = Theme();
-
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
     container: {
-        backgroundColor: theme.color.cardBackground,
+        backgroundColor: '$cardBackground',
         paddingLeft: 13,
         paddingRight: 13,
         paddingTop: 17,
         paddingBottom: 17,
         marginBottom: 3,
-        borderTopColor: theme.color.cardBorder,
-        borderBottomColor: theme.color.cardBorder,
+        borderTopColor: '$cardBorder',
+        borderBottomColor: '$cardBorder',
         borderBottomWidth: 1,
         borderTopWidth: 1
     }
