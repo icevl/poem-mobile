@@ -3,6 +3,7 @@ import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Image } from 'react-native-expo-image-cache';
 import Icon from 'react-native-vector-icons/Feather';
+import { NavigationScreenProp } from 'react-navigation';
 import { Poem } from '../../../../interfaces/poem';
 import getLocaleString from '../../../../locale/index';
 import styles from './PoemComponent.style';
@@ -14,8 +15,10 @@ import Time from '../../../components/common/Time';
 import Card from '../Card';
 import { showOverlayMenu } from '../../../../actions/application';
 import { buildPoemArray } from '../../../../helpers/poem';
+import Verified from '../user/Verified';
 
 interface Props {
+    navigator: NavigationScreenProp<any, any>;
     item: Poem;
     user?: any;
     update?: any;
@@ -71,21 +74,34 @@ class PoemComponent extends Component<Props, State> {
     }
 
     openContext() {
-        const onRemove = () => {
-            this.props.removePoem(this.props.item);
-        };
+        if (this.props.user.id === this.props.item.user.id) {
+            const onRemove = () => {
+                this.props.removePoem(this.props.item);
+            };
 
-        const menu = {
-            items: [
-                {
-                    title: getLocaleString('remove_poem'),
-                    description: getLocaleString('remove_poem_description'),
-                    icon: 'delete-outline',
-                    onClick: onRemove
-                }
-            ]
-        };
-        this.props.showOverlayMenu(menu);
+            const onEdit = () => {
+                this.props.navigator.navigate('PoemForm', { item: this.props.item });
+            };
+
+            const menu = {
+                items: [
+                    {
+                        title: getLocaleString('poem_edit'),
+                        description: getLocaleString('poem_edit_description'),
+                        icon: 'square-edit-outline',
+                        onClick: onEdit
+                    },
+                    {
+                        title: getLocaleString('poem_remove'),
+                        description: getLocaleString('poem_remove_description'),
+                        icon: 'delete-outline',
+                        onClick: onRemove
+                    }
+                ]
+            };
+
+            this.props.showOverlayMenu(menu);
+        }
     }
 
     toggleMoreButton() {
@@ -112,75 +128,82 @@ class PoemComponent extends Component<Props, State> {
         const poemArray = buildPoemArray(this.props.item.content);
 
         return (
-            <Card>
-                <View style={styles.authorRow}>
-                    <View style={styles.avatarWrapper}>
-                        <Image uri='https://image.flaticon.com/icons/png/128/236/236831.png' style={styles.avatar} />
-                    </View>
-                    <View style={styles.authorWrapper}>
-                        <Text style={styles.authorName}>{this.props.item.user.name}</Text>
-                        <Time style={styles.time} date={this.props.item.created_at} />
-                    </View>
-                    <View style={styles.contextMenuWrapper}>
-                        {this.props.user.id === this.props.item.user.id && (
+            <Touch>
+                <Card>
+                    <View style={styles.authorRow}>
+                        <View style={styles.avatarWrapper}>
+                            <Image
+                                uri='https://image.flaticon.com/icons/png/128/236/236831.png'
+                                style={styles.avatar}
+                            />
+                        </View>
+                        <View style={styles.authorWrapper}>
+                            <View style={styles.authorNameWrapper}>
+                                <Text style={styles.authorName}>{this.props.item.user.name}</Text>
+                                {this.props.item.user.is_verified && <Verified />}
+                            </View>
+                            <Time style={styles.time} date={this.props.item.created_at} />
+                        </View>
+                        <View style={styles.contextMenuWrapper}>
                             <Touch onPress={this.openContext.bind(this)}>
                                 <Icon name='more-horizontal' size={30} style={styles.moreButton} />
                             </Touch>
+                        </View>
+                    </View>
+                    <View style={styles.contentWrapper}>
+                        <Text style={styles.title}>{this.props.item.title}</Text>
+
+                        {poemArray.length <= this.shortTextLines || this.state.isShowMore ? (
+                            <React.Fragment>
+                                <Text style={styles.text}>{poemArray.map(line => `${line}\n`)}</Text>
+                                {this.state.isShowMore && this.toggleMoreButton()}
+                            </React.Fragment>
+                        ) : (
+                            <React.Fragment>
+                                <Text style={styles.text}>
+                                    {poemArray.slice(0, this.shortTextLines).map(line => `${line}\n`)}
+                                </Text>
+                                {this.toggleMoreButton()}
+                            </React.Fragment>
                         )}
                     </View>
-                </View>
-                <View style={styles.contentWrapper}>
-                    <Text style={styles.title}>{this.props.item.title}</Text>
 
-                    {poemArray.length <= this.shortTextLines || this.state.isShowMore ? (
-                        <React.Fragment>
-                            <Text style={styles.text}>{poemArray.map(line => `${line}\n`)}</Text>
-                            {this.state.isShowMore && this.toggleMoreButton()}
-                        </React.Fragment>
-                    ) : (
-                        <React.Fragment>
-                            <Text style={styles.text}>
-                                {poemArray.slice(0, this.shortTextLines).map(line => `${line}\n`)}
-                            </Text>
-                            {this.toggleMoreButton()}
-                        </React.Fragment>
+                    {this.props.item.dedicate_to && this.props.item.dedicate_to.length > 0 && (
+                        <View style={styles.dedicateToWrapper}>
+                            <Text style={styles.dedicateTo}>{getLocaleString('dedicate_to')}:</Text>
+                            <View style={styles.dedicateToLinksWrapper}>{this.getDedicateItem()}</View>
+                        </View>
                     )}
-                </View>
 
-                {this.props.item.dedicate_to && this.props.item.dedicate_to.length > 0 && (
-                    <View style={styles.dedicateToWrapper}>
-                        <Text style={styles.dedicateTo}>{getLocaleString('dedicate_to')}:</Text>
-                        <View style={styles.dedicateToLinksWrapper}>{this.getDedicateItem()}</View>
-                    </View>
-                )}
+                    <View style={styles.buttonsWrapper}>
+                        <View style={styles.buttonsAction}>
+                            <View style={styles.buttonsActionWrapper}>
+                                <PoemButton
+                                    isActive={isLiked}
+                                    icon={isLiked ? 'heart' : 'heart-outline'}
+                                    value={this.props.item.likes_count.toString()}
+                                    onPress={this.toggleLike.bind(this, isLiked)}
+                                />
+                                <PoemButton icon='comment-outline' value={this.props.item.comments_count.toString()} />
+                            </View>
+                        </View>
 
-                <View style={styles.buttonsWrapper}>
-                    <View style={styles.buttonsAction}>
-                        <View style={styles.buttonsActionWrapper}>
-                            <PoemButton
-                                isActive={isLiked}
-                                icon={isLiked ? 'heart' : 'heart-outline'}
-                                value={this.props.item.likes_count.toString()}
-                                onPress={this.toggleLike.bind(this, isLiked)}
-                            />
-                            <PoemButton icon='comment-outline' value={this.props.item.comments_count.toString()} />
+                        <View style={styles.buttonsInfo}>
+                            <View style={styles.buttonsInfoWrapper}>
+                                <PoemButton icon='eye-outline' value={this.props.item.views_count.toString()} small />
+                            </View>
                         </View>
                     </View>
-
-                    <View style={styles.buttonsInfo}>
-                        <View style={styles.buttonsInfoWrapper}>
-                            <PoemButton icon='eye-outline' value={this.props.item.views_count.toString()} small />
-                        </View>
-                    </View>
-                </View>
-            </Card>
+                </Card>
+            </Touch>
         );
     }
 }
 
 const mapStateToProps = (state: any) => {
     return {
-        user: state.user
+        user: state.user,
+        navigator: state.navigation.navigator
     };
 };
 

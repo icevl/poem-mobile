@@ -33,7 +33,7 @@ class OverlayMenu extends Component<Props> {
             <Touch key={index} onPress={this.onPress.bind(this, item)}>
                 <View style={styles.menuItemWrapper}>
                     <View style={styles.menuItemIconWrapper}>
-                        <Icon name={item.icon} size={35} />
+                        <Icon name={item.icon} size={30} />
                     </View>
                     <View style={styles.menuItemTextWrapper}>
                         <Text>{item.title}</Text>

@@ -27,8 +27,14 @@ export default EStyleSheet.create({
         flexGrow: 1
     },
 
+    authorNameWrapper: {
+        flexDirection: 'row',
+        textAlign: 'center',
+        flexGrow: 1
+    },
+
     authorName: {
-        color: '$primary',
+        color: '$cardText',
         fontSize: config.size.text
     },
 

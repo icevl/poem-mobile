@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ScrollView, Button } from 'react-native';
 import { NavigationScreenProp, withNavigationFocus } from 'react-navigation';
 import Content from '../../../components/content/Content';
@@ -20,26 +20,37 @@ interface PoemResponse {
 }
 
 const PoemFormScreen = (props: Props) => {
-    const { navigation } = props;
+    const { navigation, isFocused } = props;
+    const item = props.navigation.getParam('item');
+
     const model = new BaseModel(config.paths.poems);
 
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
+    useEffect(() => {
+        if (isFocused && item) {
+            setTitle(item.title);
+            setContent(item.content);
+        }
+    }, [isFocused]);
+
     const isValid = () => {
         return content !== '';
     };
 
-    const publicPoem = async () => {
-        const data = {
+    const getData = () => {
+        return {
             title: title.trim(),
             content: content.trim()
         };
+    };
 
+    const publicPoem = async () => {
         setIsLoading(true);
 
-        const response: PoemResponse = await model.createItem(data);
+        const response: PoemResponse = await model.createItem(getData());
         setIsLoading(false);
 
         if (response.id) {
@@ -47,7 +58,20 @@ const PoemFormScreen = (props: Props) => {
         }
     };
 
-    const button = (
+    const updatePoem = async () => {
+        setIsLoading(true);
+
+        const response: PoemResponse = await model.updateItem(item.id, getData());
+        setIsLoading(false);
+
+        if (response.id) {
+            navigation.navigate('Feed');
+        }
+    };
+
+    const navbarButton = item ? (
+        <Button title={getLocaleString('edit')} disabled={!isValid() || isLoading} onPress={() => updatePoem()} />
+    ) : (
         <Button
             title={getLocaleString('public_verb')}
             disabled={!isValid() || isLoading}
@@ -57,7 +81,7 @@ const PoemFormScreen = (props: Props) => {
 
     return (
         <Content>
-            <NavBar title={getLocaleString('public_poem')} navigation={navigation} rightButton={button} />
+            <NavBar title={getLocaleString('public_poem')} navigation={navigation} rightButton={navbarButton} />
             <ScrollView style={styles.scrollView}>
                 <Card>
                     <Input
