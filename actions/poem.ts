@@ -37,3 +37,12 @@ export function removePoem(poem: Poem) {
             });
     };
 }
+
+export function loadPoemDetails(poem: Poem) {
+    return dispatch => {
+        dispatch({
+            type: constants.POEM_LOAD_ITEM,
+            payload: poem
+        });
+    };
+}

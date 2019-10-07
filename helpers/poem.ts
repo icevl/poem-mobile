@@ -33,4 +33,8 @@ function buildPoemArray(text: string) {
     return lines;
 }
 
-export { updatePoemList, buildPoemArray };
+function getMaxLine(lines: string[]): number {
+    return lines.reduce((acc, el) => (el.length > acc ? el.length : acc), 0);
+}
+
+export { updatePoemList, buildPoemArray, getMaxLine };

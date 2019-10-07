@@ -1,4 +1,4 @@
-import { Dimensions } from 'react-native';
+import { Dimensions, Platform } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import config from '../../../../config';
 
@@ -21,21 +21,24 @@ export default EStyleSheet.create({
     },
 
     authorWrapper: {
+        height: 50,
         flexDirection: 'column',
-        justifyContent: 'center',
+        textAlign: 'center',
         marginLeft: 14,
         flexGrow: 1
     },
 
     authorNameWrapper: {
-        flexDirection: 'row',
-        textAlign: 'center',
-        flexGrow: 1
+        flexDirection: 'row'
     },
 
     authorName: {
         color: '$cardText',
         fontSize: config.size.text
+    },
+
+    authorVerified: {
+        paddingTop: Platform.OS === 'ios' ? 2 : 3
     },
 
     time: {
@@ -56,8 +59,8 @@ export default EStyleSheet.create({
         marginTop: 14,
         borderRadius: 10,
         width: '100%',
-        padding: 0
-        // backgroundColor: '$poemBackground'
+        padding: 12,
+        backgroundColor: '$poemBackground'
     },
 
     title: {
@@ -65,11 +68,6 @@ export default EStyleSheet.create({
         fontWeight: 'bold',
         paddingBottom: 5,
         fontSize: config.size.text
-    },
-
-    text: {
-        color: '$cardText',
-        fontSize: config.size.text - 2
     },
 
     dedicateToWrapper: {

@@ -14,7 +14,7 @@ import LikeModel from '../../../../models/LikeModel';
 import Time from '../../../components/common/Time';
 import Card from '../Card';
 import { showOverlayMenu } from '../../../../actions/application';
-import { buildPoemArray } from '../../../../helpers/poem';
+import PoemText from './PoemText';
 import Verified from '../user/Verified';
 
 interface Props {
@@ -24,21 +24,15 @@ interface Props {
     update?: any;
     showOverlayMenu?: (menu: any) => void;
     removePoem?: (poem: Poem) => void;
+    loadPoemDetails?: (poem: Poem) => void;
 }
 
-interface State {
-    isShowMore: boolean;
-}
-
-class PoemComponent extends Component<Props, State> {
+class PoemComponent extends Component<Props> {
     shortTextLines: number;
     likeModel: any;
 
     constructor(props) {
         super(props);
-        this.state = {
-            isShowMore: false
-        };
 
         this.shortTextLines = 12;
         this.likeModel = new LikeModel();
@@ -104,31 +98,23 @@ class PoemComponent extends Component<Props, State> {
         }
     }
 
-    toggleMoreButton() {
-        const text = this.state.isShowMore ? 'Hide' : 'Show more';
-        return (
-            <Touch onPress={this.toggleMore.bind(this)}>
-                <View>
-                    <Text>{text}</Text>
-                </View>
-            </Touch>
-        );
-    }
-
-    toggleMore() {
-        this.setState({ isShowMore: !this.state.isShowMore });
+    openPoemDetails() {
+        // this.props.loadPoemDetails(this.props.item);
+        this.props.navigator.navigate('PoemComments', { poem: this.props.item });
     }
 
     render() {
+        if (!this.props.item || !this.props.item.id) {
+            return null;
+        }
+
         const isLiked = this.props.item.likes.reduce(
             (acc, like) => (like.user_id === this.props.user.id ? true : acc),
             false
         );
 
-        const poemArray = buildPoemArray(this.props.item.content);
-
         return (
-            <Touch>
+            <Touch feedback={false}>
                 <Card>
                     <View style={styles.authorRow}>
                         <View style={styles.avatarWrapper}>
@@ -140,7 +126,9 @@ class PoemComponent extends Component<Props, State> {
                         <View style={styles.authorWrapper}>
                             <View style={styles.authorNameWrapper}>
                                 <Text style={styles.authorName}>{this.props.item.user.name}</Text>
-                                {this.props.item.user.is_verified && <Verified />}
+                                <View style={styles.authorVerified}>
+                                    {this.props.item.user.is_verified && <Verified />}
+                                </View>
                             </View>
                             <Time style={styles.time} date={this.props.item.created_at} />
                         </View>
@@ -152,20 +140,7 @@ class PoemComponent extends Component<Props, State> {
                     </View>
                     <View style={styles.contentWrapper}>
                         <Text style={styles.title}>{this.props.item.title}</Text>
-
-                        {poemArray.length <= this.shortTextLines || this.state.isShowMore ? (
-                            <React.Fragment>
-                                <Text style={styles.text}>{poemArray.map(line => `${line}\n`)}</Text>
-                                {this.state.isShowMore && this.toggleMoreButton()}
-                            </React.Fragment>
-                        ) : (
-                            <React.Fragment>
-                                <Text style={styles.text}>
-                                    {poemArray.slice(0, this.shortTextLines).map(line => `${line}\n`)}
-                                </Text>
-                                {this.toggleMoreButton()}
-                            </React.Fragment>
-                        )}
+                        <PoemText text={this.props.item.content} />
                     </View>
 
                     {this.props.item.dedicate_to && this.props.item.dedicate_to.length > 0 && (
@@ -184,7 +159,11 @@ class PoemComponent extends Component<Props, State> {
                                     value={this.props.item.likes_count.toString()}
                                     onPress={this.toggleLike.bind(this, isLiked)}
                                 />
-                                <PoemButton icon='comment-outline' value={this.props.item.comments_count.toString()} />
+                                <PoemButton
+                                    icon='comment-outline'
+                                    onPress={this.openPoemDetails.bind(this)}
+                                    value={this.props.item.comments_count.toString()}
+                                />
                             </View>
                         </View>
 

@@ -16,12 +16,13 @@ export default EStyleSheet.create({
         position: 'absolute',
         bottom: 0,
         backgroundColor: '#fff',
-        width: '100%'
+        width: '100%',
+        paddingBottom: 10
     },
 
     menuItemWrapper: {
         flexDirection: 'row',
-        height: 50,
+        height: 60,
         paddingLeft: 10,
         paddingRight: 15,
         alignItems: 'center',
@@ -38,7 +39,11 @@ export default EStyleSheet.create({
         flexGrow: 1
     },
 
+    title: {
+        fontSize: 16
+    },
+
     description: {
-        fontSize: 12
+        fontSize: 14
     }
 });

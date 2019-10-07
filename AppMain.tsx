@@ -5,10 +5,6 @@ import { connect } from 'react-redux';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { AsyncStorage } from 'react-native';
-import FeedScreen from './apps/screens/feed/FeedScreen';
-import MenuScreen from './apps/screens/menu/Menu';
-import AuthScreen from './apps/screens/auth/AuthScreen';
-import PoemFormScreen from './apps/screens/poem/form/PoemFormScreen';
 import { auth } from './actions/user';
 import { setStatusbarColor } from './actions/application';
 import { getFeedFromLocal } from './actions/feed';
@@ -16,6 +12,11 @@ import styles from './AppMain.style';
 import { getTheme } from './themes/index';
 import { setLocale } from './locale/index';
 import OverlayMenu from './apps/components/common/OverlayMenu';
+import FeedScreen from './apps/screens/feed/FeedScreen';
+import MenuScreen from './apps/screens/menu/Menu';
+import AuthScreen from './apps/screens/auth/AuthScreen';
+import PoemFormScreen from './apps/screens/poem/form/PoemFormScreen';
+import PoemCommentsScreen from './apps/screens/poem/PoemCommentsScreen';
 
 interface Props {
     auth: () => void;
@@ -87,7 +88,8 @@ class App extends React.Component<Props, State> {
                 Auth: AuthScreen,
                 Feed: FeedScreen,
                 Menu: MenuScreen,
-                PoemForm: PoemFormScreen
+                PoemForm: PoemFormScreen,
+                PoemComments: PoemCommentsScreen
             },
             {
                 initialRouteName: this.state.initialRouteName,

@@ -6,7 +6,8 @@ import config from '../../../../config';
 const styles = EStyleSheet.create({
     icon: {
         paddingLeft: 10,
-        color: '$primary'
+        color: '$primary',
+        justifyContent: 'center'
     }
 });
 

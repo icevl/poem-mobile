@@ -36,7 +36,7 @@ class OverlayMenu extends Component<Props> {
                         <Icon name={item.icon} size={30} />
                     </View>
                     <View style={styles.menuItemTextWrapper}>
-                        <Text>{item.title}</Text>
+                        <Text style={styles.title}>{item.title}</Text>
                         <Text style={styles.description}>{item.description}</Text>
                     </View>
                 </View>

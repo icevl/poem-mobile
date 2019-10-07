@@ -21,7 +21,7 @@ interface PoemResponse {
 
 const PoemFormScreen = (props: Props) => {
     const { navigation, isFocused } = props;
-    const item = props.navigation.getParam('item');
+    const item = navigation.getParam('item');
 
     const model = new BaseModel(config.paths.poems);
 
