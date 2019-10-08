@@ -7,20 +7,21 @@ class BaseModel extends Model {
         this.url = url;
     }
 
-    getList(page: number) {
-        //const offset = (page - 1) * config.listLimit;
-        //let filtersStr = '';
+    getList(page: number, filters = {}) {
+        let url = `${this.url}?page=${page}`;
+        let filtersStr = '';
 
-        // if (Object.keys(filters).length) {
-        //     for (let key in filters) {
-        //         filtersStr += `&${key}=${filters[key]}`;
-        //     }
-        // }
+        if (Object.keys(filters).length) {
+            for (let key in filters) {
+                filtersStr += `&${key}=${filters[key]}`;
+            }
+            url += filtersStr;
+        }
 
         return new Promise((resolve, reject) => {
             this.request({
                 type: 'GET',
-                url: `${this.url}?page=${page}`
+                url
             })
                 .then(r => {
                     resolve(r);
@@ -65,7 +66,7 @@ class BaseModel extends Model {
     updateItem(id, data) {
         return new Promise((resolve, reject) => {
             this.request({
-                type: 'PATCH',
+                type: 'PUT',
                 url: `${this.url}${id}/`,
                 data
             })

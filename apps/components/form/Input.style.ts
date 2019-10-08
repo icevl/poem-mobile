@@ -3,7 +3,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 export default EStyleSheet.create({
     container: {
         flexDirection: 'row',
-        borderRadius: 5,
+        borderRadius: '$contentBorderRadius',
         backgroundColor: '$poemBackground',
         padding: 10
     },

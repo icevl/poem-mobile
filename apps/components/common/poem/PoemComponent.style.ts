@@ -57,7 +57,7 @@ export default EStyleSheet.create({
 
     contentWrapper: {
         marginTop: 14,
-        borderRadius: 10,
+        borderRadius: '$contentBorderRadius',
         width: '100%',
         padding: 12,
         backgroundColor: '$poemBackground'

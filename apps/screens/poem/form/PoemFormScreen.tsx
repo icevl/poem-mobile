@@ -65,7 +65,8 @@ const PoemFormScreen = (props: Props) => {
         setIsLoading(false);
 
         if (response.id) {
-            navigation.navigate('Feed');
+            console.log('response', response);
+            // navigation.navigate('PoemComments', { poem: response });
         }
     };
 

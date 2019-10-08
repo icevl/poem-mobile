@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
+interface Props {
+    color?: string;
+}
+
 const styles = EStyleSheet.create({
     container: {
         backgroundColor: '$cardBackground',
@@ -17,8 +21,15 @@ const styles = EStyleSheet.create({
     }
 });
 
-export default class Card extends Component {
+export default class Card extends Component<Props> {
     render() {
-        return <View style={styles.container}>{this.props.children}</View>;
+        const { color } = this.props;
+
+        const cardStyles = { ...styles.container };
+        if (this.props.color) {
+            cardStyles.backgroundColor = color;
+        }
+
+        return <View style={cardStyles}>{this.props.children}</View>;
     }
 }

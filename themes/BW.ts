@@ -12,5 +12,7 @@ export default {
     $cardBackground: '#ffffff',
     $cardText: '#000000',
     $cardBorder: '#e3e4e8',
-    $poemBackground: '#fff'
+    $poemBackground: '#fff',
+
+    $contentBorderRadius: 1
 };

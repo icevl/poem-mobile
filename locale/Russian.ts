@@ -7,6 +7,8 @@ export default {
     dedicate_to: 'Посвящено',
     poem_title: 'Название стихотворения',
     poem_content: 'Стихотворение',
+    poem_content_expand: 'показать все',
+    poem_content_collapse: 'свернуть',
 
     poem_remove: 'Удалить',
     poem_remove_description: 'Стих больше не будет отображаться в ленте.',

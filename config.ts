@@ -7,7 +7,8 @@ export default {
         likes: '/api/likes/',
         facebookSignIn: '/api/auth/fblogin',
         auth: '/api/auth/',
-        poems: '/api/poems/'
+        poems: '/api/poems/',
+        comments: '/api/comments/'
     },
 
     size: {

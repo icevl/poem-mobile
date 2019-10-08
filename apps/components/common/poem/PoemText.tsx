@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import Touch from '../../../components/common/Touch';
 import { buildPoemArray, getMaxLine } from '../../../../helpers/poem';
+import getLocaleString from '../../../../locale/index';
 import styles from './PoemText.style';
 
 const PoemText = props => {
@@ -14,11 +15,13 @@ const PoemText = props => {
     const [layoutWidth, setLayoutWidth] = useState(0);
 
     const toggleMoreButton = () => {
-        const text = isShowMore ? 'Hide' : 'Show more';
+        const text = isShowMore
+            ? getLocaleString('poem_content_collapse').toUpperCase()
+            : getLocaleString('poem_content_expand').toUpperCase();
         return (
             <Touch onPress={() => toggleMore()}>
                 <View>
-                    <Text>{text}</Text>
+                    <Text style={styles.showMore}>{text}</Text>
                 </View>
             </Touch>
         );

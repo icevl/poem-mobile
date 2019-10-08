@@ -28,10 +28,7 @@ const PoemCommentsScreen = (props: Props) => {
     const target = <PoemComponent item={stateItem} />;
     return (
         <Content>
-            <Comments target={target} />
-            {/* <ScrollView style={styles.scrollView}>
-                <PoemComponent item={stateItem} />
-            </ScrollView> */}
+            <Comments target={target} type='poem' id={screenItem.id} />
             <BottomBar navigation={navigation} />
         </Content>
     );
