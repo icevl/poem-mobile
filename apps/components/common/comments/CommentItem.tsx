@@ -8,11 +8,12 @@ import styles from './CommentItem.style';
 
 const CommentItem = props => {
     const { item } = props;
+
     return (
         <View style={styles.container}>
             <View style={styles.authorRow}>
                 <View style={styles.avatarWrapper}>
-                    <Image uri='https://image.flaticon.com/icons/png/128/236/236831.png' style={styles.avatar} />
+                    <Image uri={item.user.avatar_url} style={styles.avatar} />
                 </View>
                 <View style={styles.authorWrapper}>
                     <View style={styles.authorNameWrapper}>

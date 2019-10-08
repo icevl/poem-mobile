@@ -56,7 +56,7 @@ export default EStyleSheet.create({
     },
 
     contentWrapper: {
-        marginTop: 14,
+        marginTop: '$contentMarginTop',
         borderRadius: '$contentBorderRadius',
         width: '100%',
         padding: 12,

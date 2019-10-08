@@ -13,5 +13,6 @@ export default {
     $cardBorder: 'transparent',
     $poemBackground: '#253849',
 
-    $contentBorderRadius: 10
+    $contentBorderRadius: 10,
+    $contentMarginTop: 20
 };
