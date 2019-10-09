@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
     scrollView: {
-        backgroundColor: 'transparent'
+        backgroundColor: 'transparent',
+        marginBottom: 50
     }
 });

@@ -46,14 +46,14 @@ class Comments extends Component<Props> {
     }
 
     render() {
-        const { target, navigation } = this.props;
+        const { navigation } = this.props;
 
         return (
             <React.Fragment>
                 <NavBar title={getLocaleString('comments')} navigation={navigation} rightButton={true} back />
                 <ScrollView style={styles.scrollView} onScroll={this.onScroll.bind(this)} scrollEventThrottle={16}>
-                    {target}
-                    <Card color={EStyleSheet.value('$poemBackground')}>
+                    {/* {target} */}
+                    <Card color={EStyleSheet.value('$cardBackground')}>
                         {this.props.comments.map((comment, index) => (
                             <CommentItem item={comment} key={index} />
                         ))}

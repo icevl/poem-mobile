@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { View, Text, Keyboard } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { View, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 import Input from '../../form/Input';
 import Touch from '../Touch';
@@ -33,6 +34,7 @@ class CommentSend extends Component<Props, State> {
     }
 
     sendComment() {
+        this.setState({ text: '' });
         this.props.postComment(this.props.type, this.props.id, this.state.text);
     }
 
@@ -56,18 +58,21 @@ class CommentSend extends Component<Props, State> {
 
         return (
             <View style={containerStyle}>
-                <View>
+                <View style={styles.inputWrapper}>
                     <Input
                         placeholder='input text'
                         onChangeText={this.onCommentChange.bind(this)}
+                        value={this.state.text}
                         backgroundColor={EStyleSheet.value('$cardBackground')}
                         multiline
                     />
                 </View>
-                <View>
-                    <Touch onPress={this.sendComment.bind(this)}>
-                        <Text>SEND</Text>
-                    </Touch>
+                <View style={styles.buttonWrapper}>
+                    {this.state.text ? (
+                        <Touch onPress={this.sendComment.bind(this)}>
+                            <Icon name='telegram' size={30} style={styles.sendIcon} />
+                        </Touch>
+                    ) : null}
                 </View>
             </View>
         );

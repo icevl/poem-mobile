@@ -2,7 +2,7 @@ export default {
     $theme: 'dark',
     $primary: '#6ab3f3',
     $navbarText: 'white',
-    $navbarBackground: '#242f3d',
+    $navbarBackground: '#131c23',
     $bottombarBackground: '#131c23',
     $bottombarBorder: '#121c27',
     $bottombarText: '#fff',

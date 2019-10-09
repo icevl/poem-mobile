@@ -50,7 +50,7 @@ export default EStyleSheet.create({
         borderRadius: '$contentBorderRadius',
         width: '100%',
         padding: 12,
-        backgroundColor: '$cardBackground'
+        backgroundColor: '$poemBackground'
     },
 
     contentText: {
