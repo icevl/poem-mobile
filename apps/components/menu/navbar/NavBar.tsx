@@ -5,12 +5,14 @@ import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './NavBar.style';
 import { setNavigation } from '../../../../actions/navigation';
+import Touch from '../../common/Touch';
 
 interface Props {
     navigation: NavigationScreenProp<any, any>;
     title?: string;
     setNavigation: (navigation: NavigationScreenProp<any, any>) => void;
     rightButton?: React.ReactNode;
+    back?: boolean;
 }
 
 class TopNavBar extends React.Component<Props> {
@@ -26,11 +28,23 @@ class TopNavBar extends React.Component<Props> {
         this.props.navigation.navigate(screen);
     }
 
+    goBack() {
+        this.props.navigation.goBack();
+    }
+
     render() {
-        const { rightButton } = this.props;
+        const { rightButton, back } = this.props;
         return (
             <View>
                 <View style={styles.container}>
+                    {back && (
+                        <View style={styles.leftIconWrapper}>
+                            <Touch onPress={this.goBack.bind(this)}>
+                                <Icon name='arrow-back' size={24} style={styles.leftIcon} />
+                            </Touch>
+                        </View>
+                    )}
+
                     <View style={styles.titleWrapper}>
                         <Text style={styles.title}>
                             {this.props.title

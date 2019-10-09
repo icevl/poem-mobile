@@ -12,5 +12,6 @@ export default {
     poem_remove: 'Delete',
     poem_remove_description: 'Стих больше не будет отображаться в ленте.',
     poem_edit: 'Edit',
-    poem_edit_description: 'Редактировать стих'
+    poem_edit_description: 'Редактировать стих',
+    comments: 'Comments'
 };

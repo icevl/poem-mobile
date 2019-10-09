@@ -22,6 +22,7 @@ interface Props {
     item: Poem;
     user?: any;
     update?: any;
+    actions?: boolean;
     showOverlayMenu?: (menu: any) => void;
     removePoem?: (poem: Poem) => void;
     loadPoemDetails?: (poem: Poem) => void;
@@ -113,6 +114,8 @@ class PoemComponent extends Component<Props> {
             false
         );
 
+        const showActions = !('actions' in this.props) || this.props.actions;
+
         return (
             <Touch feedback={false}>
                 <Card>
@@ -147,29 +150,35 @@ class PoemComponent extends Component<Props> {
                         </View>
                     )}
 
-                    <View style={styles.buttonsWrapper}>
-                        <View style={styles.buttonsAction}>
-                            <View style={styles.buttonsActionWrapper}>
-                                <PoemButton
-                                    isActive={isLiked}
-                                    icon={isLiked ? 'heart' : 'heart-outline'}
-                                    value={this.props.item.likes_count.toString()}
-                                    onPress={this.toggleLike.bind(this, isLiked)}
-                                />
-                                <PoemButton
-                                    icon='comment-outline'
-                                    onPress={this.openPoemDetails.bind(this)}
-                                    value={this.props.item.comments_count.toString()}
-                                />
+                    {showActions && (
+                        <View style={styles.buttonsWrapper}>
+                            <View style={styles.buttonsAction}>
+                                <View style={styles.buttonsActionWrapper}>
+                                    <PoemButton
+                                        isActive={isLiked}
+                                        icon={isLiked ? 'heart' : 'heart-outline'}
+                                        value={this.props.item.likes_count.toString()}
+                                        onPress={this.toggleLike.bind(this, isLiked)}
+                                    />
+                                    <PoemButton
+                                        icon='comment-outline'
+                                        onPress={this.openPoemDetails.bind(this)}
+                                        value={this.props.item.comments_count.toString()}
+                                    />
+                                </View>
                             </View>
-                        </View>
 
-                        <View style={styles.buttonsInfo}>
-                            <View style={styles.buttonsInfoWrapper}>
-                                <PoemButton icon='eye-outline' value={this.props.item.views_count.toString()} small />
+                            <View style={styles.buttonsInfo}>
+                                <View style={styles.buttonsInfoWrapper}>
+                                    <PoemButton
+                                        icon='eye-outline'
+                                        value={this.props.item.views_count.toString()}
+                                        small
+                                    />
+                                </View>
                             </View>
                         </View>
-                    </View>
+                    )}
                 </Card>
             </Touch>
         );

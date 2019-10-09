@@ -1,6 +1,6 @@
 export default {
     logout: 'Выход',
-    feed: 'лента стихов',
+    feed: 'лента',
     edit: 'Изменить',
     public_poem: 'публикация',
     public_verb: 'опубликовать',
@@ -13,5 +13,7 @@ export default {
     poem_remove: 'Удалить',
     poem_remove_description: 'Стих больше не будет отображаться в ленте.',
     poem_edit: 'Редактировать',
-    poem_edit_description: 'Редактировать стих'
+    poem_edit_description: 'Редактировать стих',
+
+    comments: 'Комментарии'
 };

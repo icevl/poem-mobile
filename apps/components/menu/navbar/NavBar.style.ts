@@ -25,18 +25,35 @@ export default EStyleSheet.create({
         height: 40
     },
 
+    leftIconWrapper: {
+        flexDirection: 'column',
+        textAlign: 'center',
+        justifyContent: 'center',
+        width: 25,
+        marginLeft: 20
+    },
+
+    leftIcon: {
+        // paddingTop: Platform.OS === 'ios' ? 18 : 15,
+        // paddingLeft: 12,
+        color: '$navbarText'
+        // opacity: 0.3
+    },
+
     titleWrapper: {
         flexDirection: 'column',
         textAlign: 'center',
         justifyContent: 'center',
-        flex: 1
+        flex: 1,
+        flexGrow: 1,
+        marginLeft: 20
     },
 
     title: {
-        fontFamily: 'Nautilus',
+        fontFamily: 'Electrolize',
         color: '$navbarText',
         fontSize: 21,
-        textAlign: 'center',
+        textAlign: 'left',
         opacity: 0.8
     },
 

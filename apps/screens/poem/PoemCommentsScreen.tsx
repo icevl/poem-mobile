@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { NavigationScreenProp, withNavigationFocus } from 'react-navigation';
 import PoemComponent from '../../components/common/poem/PoemComponent';
 import Content from '../../components/content/Content';
-import BottomBar from '../../components/menu/bottombar/BottomBar';
 import { loadPoemDetails } from '../../../actions/poem';
 import Comments from '../../components/common/comments/Comments';
 
@@ -25,11 +24,10 @@ const PoemCommentsScreen = (props: Props) => {
         }
     }, [isFocused]);
 
-    const target = <PoemComponent item={stateItem} />;
+    const target = <PoemComponent item={stateItem} actions={false} />;
     return (
         <Content>
-            <Comments target={target} type='poem' id={screenItem.id} />
-            <BottomBar navigation={navigation} />
+            <Comments target={target} type='poem' id={screenItem.id} navigation={navigation} />
         </Content>
     );
 };

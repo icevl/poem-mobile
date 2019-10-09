@@ -28,3 +28,28 @@ export function getList(page: number, type: string, id: number) {
             });
     };
 }
+
+export function postComment(type: string, id: number, content: string) {
+    return dispatch => {
+        dispatch({
+            type: constants.COMMENTS_ADD_REQUEST
+        });
+
+        Model.createItem({
+            type,
+            id,
+            content
+        })
+            .then((r: Pagination) => {
+                dispatch({
+                    type: constants.COMMENTS_ADD_SUCCESS,
+                    payload: r
+                });
+            })
+            .catch(() => {
+                dispatch({
+                    type: constants.COMMENTS_ADD_FAIL
+                });
+            });
+    };
+}

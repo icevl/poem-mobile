@@ -1,18 +1,17 @@
 export default {
     $theme: 'dark',
-    $primary: '#1f89c4',
+    $primary: '#6ab3f3',
     $navbarText: 'white',
-    $navbarBackground: '#131c23',
+    $navbarBackground: '#242f3d',
     $bottombarBackground: '#131c23',
-    $bottombarBorder: '#203340',
+    $bottombarBorder: '#121c27',
     $bottombarText: '#fff',
-    $bottombarActive: '#1f89c4',
-    $background: '#181617',
-    $cardBackground: '#1f3f4e',
+    $bottombarActive: '#6ab3f3',
+    $background: '#0e1621',
+    $cardBackground: '#182533',
     $cardText: '#ffffff',
     $cardBorder: 'transparent',
-    $poemBackground: '#253849',
-
+    $poemBackground: '#242f3d',
     $contentBorderRadius: 10,
     $contentMarginTop: 20
 };

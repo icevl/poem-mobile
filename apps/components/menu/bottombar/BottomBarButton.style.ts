@@ -16,6 +16,6 @@ export default EStyleSheet.create({
 
     active: {
         color: '$bottombarActive',
-        opacity: 0.9
+        opacity: 1
     }
 });

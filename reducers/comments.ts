@@ -1,4 +1,6 @@
 import constants from '../constants/comments';
+import { updateItemList } from '../helpers/common';
+
 // import constantsPoem from '../constants/comments';
 
 const initialState = {
@@ -30,7 +32,10 @@ export default function comments(state = initialState, action) {
             return {
                 ...state,
                 isLoading: false,
-                items: action.payload.results,
+                items:
+                    action.payload.page === 1
+                        ? action.payload.results
+                        : updateItemList(state.items, action.payload.results, 'ASC'),
                 paginator: {
                     ...state.paginator,
                     total: action.payload.total,
