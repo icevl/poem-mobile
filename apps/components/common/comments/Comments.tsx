@@ -53,11 +53,14 @@ class Comments extends Component<Props> {
                 <NavBar title={getLocaleString('comments')} navigation={navigation} rightButton={true} back />
                 <ScrollView style={styles.scrollView} onScroll={this.onScroll.bind(this)} scrollEventThrottle={16}>
                     {/* {target} */}
-                    <Card color={EStyleSheet.value('$cardBackground')}>
-                        {this.props.comments.map((comment, index) => (
-                            <CommentItem item={comment} key={index} />
-                        ))}
-                    </Card>
+
+                    {this.props.comments.length ? (
+                        <Card color={EStyleSheet.value('$cardBackground')}>
+                            {this.props.comments.map((comment, index) => (
+                                <CommentItem item={comment} key={index} />
+                            ))}
+                        </Card>
+                    ) : null}
                 </ScrollView>
                 <CommentSend type={this.props.type} id={this.props.id} />
             </React.Fragment>

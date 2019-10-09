@@ -1,23 +1,23 @@
-import { Dimensions, Platform } from 'react-native';
+import { Platform } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import config from '../../../../config';
 
 export default EStyleSheet.create({
     authorRow: {
         flexDirection: 'row',
-        height: 30
+        height: 40
     },
 
     avatarWrapper: {
         flexDirection: 'column',
-        width: 30,
-        borderRadius: 15,
+        width: 40,
+        borderRadius: 20,
         overflow: 'hidden'
     },
 
     avatar: {
-        width: 30,
-        height: 30
+        width: 40,
+        height: 40
     },
 
     authorWrapper: {
@@ -102,7 +102,8 @@ export default EStyleSheet.create({
     buttonsAction: {
         flexDirection: 'column',
         justifyContent: 'center',
-        width: Dimensions.get('window').width - 80
+        flexGrow: 1
+        // width: Dimensions.get('window').width - 80
     },
 
     buttonsActionWrapper: {
@@ -115,7 +116,6 @@ export default EStyleSheet.create({
     },
 
     buttonsInfo: {
-        width: 80,
         flexDirection: 'column',
         justifyContent: 'center'
     },

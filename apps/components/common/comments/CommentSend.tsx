@@ -29,8 +29,16 @@ class CommentSend extends Component<Props, State> {
             text: '',
             keyboardHeight: 0
         };
-        this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.onKeyboardShow.bind(this));
-        this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.onKeyboardHide.bind(this));
+        this.keyboardDidShowListener = this.onKeyboardShow.bind(this);
+        this.keyboardDidHideListener = this.onKeyboardHide.bind(this);
+
+        Keyboard.addListener('keyboardDidShow', this.keyboardDidShowListener);
+        Keyboard.addListener('keyboardDidHide', this.keyboardDidHideListener);
+    }
+
+    componentWillUnmount() {
+        Keyboard.removeListener('keyboardDidShow', this.keyboardDidShowListener);
+        Keyboard.removeListener('keyboardDidHide', this.keyboardDidHideListener);
     }
 
     sendComment() {
@@ -53,7 +61,7 @@ class CommentSend extends Component<Props, State> {
         const containerStyle = {
             ...styles.container,
             position: 'absolute',
-            bottom: this.state.keyboardHeight
+            bottom: this.state.keyboardHeight ? this.state.keyboardHeight + 20 : 0
         };
 
         return (
@@ -72,7 +80,9 @@ class CommentSend extends Component<Props, State> {
                         <Touch onPress={this.sendComment.bind(this)}>
                             <Icon name='telegram' size={30} style={styles.sendIcon} />
                         </Touch>
-                    ) : null}
+                    ) : (
+                        <Icon name='telegram' size={30} style={{ ...styles.sendIcon, opacity: 0.3 }} />
+                    )}
                 </View>
             </View>
         );
