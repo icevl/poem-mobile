@@ -27,6 +27,11 @@ export function getLocale(): string {
     return current;
 }
 
+export async function getCurrentLocale() {
+    const locale = await AsyncStorage.getItem('locale');
+    return locale;
+}
+
 export async function setLocale(locale: string) {
     if (!dictionary[locale]) {
         return false;

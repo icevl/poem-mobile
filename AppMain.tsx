@@ -17,6 +17,7 @@ import MenuScreen from './apps/screens/menu/Menu';
 import AuthScreen from './apps/screens/auth/AuthScreen';
 import PoemFormScreen from './apps/screens/poem/form/PoemFormScreen';
 import PoemCommentsScreen from './apps/screens/poem/PoemCommentsScreen';
+import UserScreen from './apps/screens/user/UserScreen';
 
 interface Props {
     auth: () => void;
@@ -89,7 +90,8 @@ class App extends React.Component<Props, State> {
                 Feed: FeedScreen,
                 Menu: MenuScreen,
                 PoemForm: PoemFormScreen,
-                PoemComments: PoemCommentsScreen
+                PoemComments: PoemCommentsScreen,
+                User: UserScreen
             },
             {
                 initialRouteName: this.state.initialRouteName,

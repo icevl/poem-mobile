@@ -31,18 +31,22 @@ const LikeButton = props => {
     const Icon = getIcon();
 
     return (
-        <Touch onPress={onPress ? e => onPress(e) : null} feedback={false}>
-            <View style={{ ...styles.container, ...(active && styles.active) }}>
-                <Icon
-                    width={30}
-                    height={30}
-                    fill={active ? EStyleSheet.value('$primary') : EStyleSheet.value('$cardText')}
-                />
+        <View style={{ ...styles.container, ...(active && styles.active) }}>
+            <Touch onPress={onPress ? e => onPress(e) : null} feedback={true}>
+                <View style={styles.icon}>
+                    <Icon
+                        width={30}
+                        height={30}
+                        fill={active ? EStyleSheet.value('$primary') : EStyleSheet.value('$cardText')}
+                    />
+                </View>
+            </Touch>
+            {'value' in props && (
                 <View style={styles.textWrapper}>
                     <Text style={{ ...styles.label, ...fontExtraStyle, ...(active && styles.active) }}>{value}</Text>
                 </View>
-            </View>
-        </Touch>
+            )}
+        </View>
     );
 };
 

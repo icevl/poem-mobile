@@ -2,6 +2,7 @@ import React from 'react';
 import { ScrollView, RefreshControl } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationScreenProp, withNavigationFocus } from 'react-navigation';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import NavBar from '../../components/menu/navbar/NavBar';
 import BottomBar from '../../components/menu/bottombar/BottomBar';
 import Content from '../../components/content/Content';
@@ -11,6 +12,8 @@ import { Poem } from 'interfaces/poem';
 import styles from './FeedScreen.style';
 // import Loader from '../../components/common/Loader';
 import { getList, refreshFeed } from '../../../actions/feed';
+import { getDailyPoem } from '../../../actions/poem';
+import DailyPoem from '../../components/common/dailypoem/DailyPoem';
 
 interface Paginator {
     page: number;
@@ -24,8 +27,10 @@ interface Props {
     isLoading: boolean;
     isRefreshLoading: boolean;
     navigation: NavigationScreenProp<any, any>;
+    filters?: any;
     getList?: (id: number) => void;
     refreshFeed?: (options?: any) => void;
+    getDailyPoem?: () => void;
     isFocused?: boolean;
     paginator: Paginator;
 }
@@ -33,18 +38,20 @@ interface Props {
 class FeedScreen extends React.Component<Props> {
     componentDidMount() {
         this.props.getList(1);
+        this.props.getDailyPoem();
     }
 
     componentDidUpdate(prevProps) {
         if (!prevProps.isFocused && this.props.isFocused) {
             //@ts-ignore
             // this.scrollRef.scrollTo({ x: 0, y: 0, animated: false });
-            this.props.refreshFeed({ showLoader: true });
+            this.props.refreshFeed({ showLoader: false, filters: this.props.filters });
         }
     }
 
     onRefresh() {
-        this.props.refreshFeed();
+        this.props.refreshFeed({ filters: this.props.filters });
+        this.props.getDailyPoem();
     }
 
     onScroll({ nativeEvent }) {
@@ -79,9 +86,11 @@ class FeedScreen extends React.Component<Props> {
                         <RefreshControl
                             refreshing={this.props.isRefreshLoading}
                             onRefresh={this.onRefresh.bind(this)}
+                            tintColor={EStyleSheet.value('$cardText')}
                         />
                     }
                     onScroll={this.onScroll.bind(this)}>
+                    <DailyPoem />
                     {this.props.feed.map((item, key) => (
                         <PoemComponent item={item} key={key} />
                     ))}
@@ -98,12 +107,13 @@ const mapStateToProps = (state: any) => {
         isLoading: state.feed.isLoading,
         isRefreshLoading: state.feed.isRefreshLoading,
         feed: state.feed.items,
+        filters: state.feed.filters,
         paginator: state.feed.paginator
     };
 };
 
 export default connect(
     mapStateToProps,
-    { getList, refreshFeed }
+    { getList, refreshFeed, getDailyPoem }
     //@ts-ignore
 )(withNavigationFocus(FeedScreen));

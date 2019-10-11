@@ -5,13 +5,14 @@ export default EStyleSheet.create({
     container: {
         flexDirection: 'row',
         opacity: 0.3,
-        marginRight: 30,
+        width: 75,
         justifyContent: 'center'
     },
 
     icon: {
         flexDirection: 'column',
-        color: '$cardText'
+        color: '$cardText',
+        width: 30
     },
 
     label: {
@@ -20,7 +21,8 @@ export default EStyleSheet.create({
         fontWeight: 'bold',
         fontSize: config.size.text,
         marginLeft: 8,
-        textAlign: 'center'
+        // textAlign: 'center',
+        width: 40
     },
 
     textWrapper: {

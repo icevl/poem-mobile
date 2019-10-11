@@ -6,6 +6,7 @@ const initialState = {
     isLoading: false,
     isRefreshLoading: false,
 
+    filters: {},
     items: [],
     paginator: {
         total: 0,
@@ -20,6 +21,7 @@ export default function feed(state = initialState, action) {
             return {
                 ...state,
                 isLoading: true,
+                filters: action.payload.filters,
                 paginator: {
                     ...state.paginator,
                     page: action.payload.page
@@ -67,7 +69,8 @@ export default function feed(state = initialState, action) {
         case constants.FEED_LIST_REFRESH_REQUEST:
             return {
                 ...state,
-                isRefreshLoading: action.payload.showLoader || !('showLoader' in action.payload)
+                //isRefreshLoading: action.payload.showLoader || !('showLoader' in action.payload)
+                isRefreshLoading: true
             };
 
         case constants.FEED_LIST_REFRESH_SUCCESS:

@@ -105,6 +105,10 @@ class PoemComponent extends Component<Props> {
         this.props.navigator.navigate('PoemComments', { poem: this.props.item });
     }
 
+    onUserOpen(userId: number, meta) {
+        this.props.navigator.navigate('User', { id: userId, user: meta });
+    }
+
     render() {
         if (!this.props.item || !this.props.item.id) {
             return null;
@@ -121,18 +125,26 @@ class PoemComponent extends Component<Props> {
             <Touch feedback={false}>
                 <Card>
                     <View style={styles.authorRow}>
-                        <View style={styles.avatarWrapper}>
-                            <Image uri={this.props.item.user.avatar_url} style={styles.avatar} />
-                        </View>
-                        <View style={styles.authorWrapper}>
-                            <View style={styles.authorNameWrapper}>
-                                <Text style={styles.authorName}>{this.props.item.user.name}</Text>
-                                <View style={styles.authorVerified}>
-                                    {this.props.item.user.is_verified && <Verified />}
-                                </View>
+                        <Touch
+                            onPress={this.onUserOpen.bind(this, this.props.item.user.id, this.props.item.user)}
+                            feedback={false}>
+                            <View style={styles.avatarWrapper}>
+                                <Image uri={this.props.item.user.avatar_url} style={styles.avatar} />
                             </View>
-                            <Time style={styles.time} date={this.props.item.created_at} />
-                        </View>
+                        </Touch>
+                        <Touch
+                            onPress={this.onUserOpen.bind(this, this.props.item.user.id, this.props.item.user)}
+                            feedback={false}>
+                            <View style={styles.authorWrapper}>
+                                <View style={styles.authorNameWrapper}>
+                                    <Text style={styles.authorName}>{this.props.item.user.name}</Text>
+                                    <View style={styles.authorVerified}>
+                                        {this.props.item.user.is_verified && <Verified />}
+                                    </View>
+                                </View>
+                                <Time style={styles.time} date={this.props.item.created_at} />
+                            </View>
+                        </Touch>
                         <View style={styles.contextMenuWrapper}>
                             <Touch onPress={this.openContext.bind(this)}>
                                 <Icon name='more-horizontal' size={30} style={styles.moreButton} />

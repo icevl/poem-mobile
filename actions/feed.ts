@@ -6,16 +6,17 @@ import { Pagination } from 'interfaces/pagination';
 
 const Model = new BaseModel(config.paths.feed);
 
-export function getList(page: number) {
+export function getList(page: number, filters = {}) {
     return dispatch => {
         dispatch({
             type: constants.FEED_LIST_REQUEST,
             payload: {
-                page
+                page,
+                filters
             }
         });
 
-        Model.getList(page)
+        Model.getList(page, filters)
             .then((r: Pagination) => {
                 dispatch({
                     type: constants.FEED_LIST_SUCCESS,
@@ -34,14 +35,14 @@ export function getList(page: number) {
     };
 }
 
-export function refreshFeed(options = {}) {
+export function refreshFeed(options: any = {}) {
     return dispatch => {
         dispatch({
             type: constants.FEED_LIST_REFRESH_REQUEST,
             payload: options
         });
 
-        Model.getList(1)
+        Model.getList(1, options.filters)
             .then((r: any) => {
                 dispatch({
                     type: constants.FEED_LIST_REFRESH_SUCCESS,

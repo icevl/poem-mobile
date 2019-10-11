@@ -8,7 +8,9 @@ export default {
         facebookSignIn: '/api/auth/fblogin',
         auth: '/api/auth/',
         poems: '/api/poems/',
-        comments: '/api/comments/'
+        comments: '/api/comments/',
+        users: '/api/users/',
+        dailypoem: '/api/dailypoems/'
     },
 
     size: {

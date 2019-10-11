@@ -1,7 +1,8 @@
 import constants from '../constants/poem';
 
 const initialState: any = {
-    item: {}
+    item: {},
+    daily: {}
 };
 
 export default function poem(state = initialState, action) {
@@ -16,6 +17,12 @@ export default function poem(state = initialState, action) {
             return {
                 ...state,
                 item: action.payload
+            };
+
+        case constants.POEM_DAILY_SUCCESS:
+            return {
+                ...state,
+                daily: action.payload
             };
 
         default:
