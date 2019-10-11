@@ -1,27 +1,43 @@
 {
-    "expo": {
-        "name": "Prose",
-        "slug": "prose-mobile",
-        "privacy": "public",
-        "sdkVersion": "34.0.0",
-        "platforms": ["ios", "android", "web"],
-        "version": "0.0.1",
-        "orientation": "portrait",
-        "icon": "./assets/icon.png",
-        "splash": {
-            "image": "./assets/images/splash.png",
-            "backgroundColor": "#131c23"
-        },
-        "updates": {
-            "fallbackToCacheTimeout": 0
-        },
-        "assetBundlePatterns": ["**/*"],
-        "ios": {
-            "supportsTablet": true,
-            "bundleIdentifier": "com.rosnet.prose"
-        },
-        "android": {
-            "package": "com.rosnet.prose"
-        }
+  "expo": {
+    "name": "Prose",
+    "slug": "prose-mobile",
+    "privacy": "public",
+    "sdkVersion": "35.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "0.0.1",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "backgroundColor": "#131c23"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.rosnet.prose"
+    },
+    "android": {
+      "package": "com.rosnet.prose"
+    },
+    "packagerOpts": {
+      "config": "metro.config.js",
+      "sourceExts": [
+        "js",
+        "jsx",
+        "ts",
+        "tsx",
+        "svg"
+      ]
     }
+  }
 }

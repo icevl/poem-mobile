@@ -95,7 +95,7 @@ export default EStyleSheet.create({
     },
 
     buttonsWrapper: {
-        marginTop: 40,
+        marginTop: 20,
         flexDirection: 'row'
     },
 

@@ -38,7 +38,7 @@ class FeedScreen extends React.Component<Props> {
     componentDidUpdate(prevProps) {
         if (!prevProps.isFocused && this.props.isFocused) {
             //@ts-ignore
-            this.scrollRef.scrollTo({ x: 0, y: 0, animated: false });
+            // this.scrollRef.scrollTo({ x: 0, y: 0, animated: false });
             this.props.refreshFeed({ showLoader: true });
         }
     }

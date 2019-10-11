@@ -16,6 +16,7 @@ import Card from '../Card';
 import { showOverlayMenu } from '../../../../actions/application';
 import PoemText from './PoemText';
 import Verified from '../user/Verified';
+import ActionButton from '../buttons/ActionButton';
 
 interface Props {
     navigator: NavigationScreenProp<any, any>;
@@ -154,17 +155,20 @@ class PoemComponent extends Component<Props> {
                         <View style={styles.buttonsWrapper}>
                             <View style={styles.buttonsAction}>
                                 <View style={styles.buttonsActionWrapper}>
-                                    <PoemButton
-                                        isActive={isLiked}
-                                        icon={isLiked ? 'heart' : 'heart-outline'}
-                                        value={this.props.item.likes_count.toString()}
+                                    <ActionButton
                                         onPress={this.toggleLike.bind(this, isLiked)}
+                                        value={this.props.item.likes_count.toString()}
+                                        active={isLiked}
+                                        icon='like'
                                     />
-                                    <PoemButton
-                                        icon='comment-outline'
+
+                                    <ActionButton
                                         onPress={this.openPoemDetails.bind(this)}
                                         value={this.props.item.comments_count.toString()}
+                                        icon='comment'
                                     />
+
+                                    <ActionButton icon='star' />
                                 </View>
                             </View>
 
