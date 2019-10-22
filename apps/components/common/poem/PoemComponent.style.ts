@@ -100,6 +100,7 @@ export default EStyleSheet.create({
     },
 
     buttonsAction: {
+        marginLeft: 10,
         flexDirection: 'column',
         justifyContent: 'center',
         flexGrow: 1

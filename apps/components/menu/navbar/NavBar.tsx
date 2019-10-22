@@ -13,11 +13,32 @@ interface Props {
     setNavigation: (navigation: NavigationScreenProp<any, any>) => void;
     rightButton?: React.ReactNode;
     back?: boolean;
+    display?: boolean;
 }
 
-class TopNavBar extends React.Component<Props> {
+interface State {
+    isDisplay: boolean;
+}
+
+class TopNavBar extends React.Component<Props, State> {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isDisplay: true
+        };
+    }
     componentDidMount() {
+        if ('display' in this.props) {
+            this.setState({ isDisplay: this.props.display });
+        }
+
         this.props.setNavigation(this.props.navigation);
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.display !== this.props.display) {
+            this.setState({ isDisplay: this.props.display });
+        }
     }
 
     onShowMenu() {
@@ -34,32 +55,35 @@ class TopNavBar extends React.Component<Props> {
 
     render() {
         const { rightButton, back } = this.props;
+        const container = { ...styles.container };
+
+        if (!this.state.isDisplay) {
+            container.opacity = 0;
+            container.height = 0;
+        }
+
         return (
-            <View>
-                <View style={styles.container}>
-                    {back && (
-                        <View style={styles.leftIconWrapper}>
-                            <Touch onPress={this.goBack.bind(this)}>
-                                <Icon name='arrow-back' size={24} style={styles.leftIcon} />
-                            </Touch>
-                        </View>
+            <View style={container}>
+                {back && (
+                    <View style={styles.leftIconWrapper}>
+                        <Touch onPress={this.goBack.bind(this)}>
+                            <Icon name='arrow-back' size={24} style={styles.leftIcon} />
+                        </Touch>
+                    </View>
+                )}
+
+                <View style={styles.titleWrapper}>
+                    <Text style={styles.title}>
+                        {this.props.title ? this.props.title.charAt(0).toUpperCase() + this.props.title.slice(1) : ''}
+                    </Text>
+                </View>
+
+                <View style={styles.rightIconWrapper}>
+                    {!rightButton ? (
+                        <Icon name='menu' size={24} style={styles.menuIcon} onPress={this.onShowMenu.bind(this)} />
+                    ) : (
+                        rightButton
                     )}
-
-                    <View style={styles.titleWrapper}>
-                        <Text style={styles.title}>
-                            {this.props.title
-                                ? this.props.title.charAt(0).toUpperCase() + this.props.title.slice(1)
-                                : ''}
-                        </Text>
-                    </View>
-
-                    <View style={styles.rightIconWrapper}>
-                        {!rightButton ? (
-                            <Icon name='menu' size={24} style={styles.menuIcon} onPress={this.onShowMenu.bind(this)} />
-                        ) : (
-                            rightButton
-                        )}
-                    </View>
                 </View>
             </View>
         );

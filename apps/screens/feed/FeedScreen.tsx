@@ -1,19 +1,16 @@
 import React from 'react';
-import { ScrollView, RefreshControl } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationScreenProp, withNavigationFocus } from 'react-navigation';
-import EStyleSheet from 'react-native-extended-stylesheet';
-import NavBar from '../../components/menu/navbar/NavBar';
 import BottomBar from '../../components/menu/bottombar/BottomBar';
 import Content from '../../components/content/Content';
 import getLocaleString from '../../../locale/index';
 import PoemComponent from '../../components/common/poem/PoemComponent';
 import { Poem } from 'interfaces/poem';
-import styles from './FeedScreen.style';
-// import Loader from '../../components/common/Loader';
+
 import { getList, refreshFeed } from '../../../actions/feed';
 import { getDailyPoem } from '../../../actions/poem';
 import DailyPoem from '../../components/common/dailypoem/DailyPoem';
+import ScrollContent from '../../components/common/ScrollContent';
 
 interface Paginator {
     page: number;
@@ -54,47 +51,24 @@ class FeedScreen extends React.Component<Props> {
         this.props.getDailyPoem();
     }
 
-    onScroll({ nativeEvent }) {
-        if (
-            !this.props.isLoading &&
-            this.isCloseToBottom(nativeEvent) &&
-            this.props.paginator.page < this.props.paginator.pages
-        ) {
-            this.setState({ lastScrollPos: nativeEvent.contentOffset.y });
-            const nextpage = this.props.paginator.page + 1;
-            this.props.getList(nextpage);
-        }
-    }
-
-    isCloseToBottom({ layoutMeasurement, contentOffset, contentSize }) {
-        return layoutMeasurement.height + contentOffset.y >= contentSize.height - 1000;
-    }
-
     render() {
         const { navigation } = this.props;
 
         return (
             <Content>
-                <NavBar title={getLocaleString('feed')} navigation={navigation} />
-                {/* <Loader isLoading={this.props.isLoading && this.props.paginator.page === 1} /> */}
-
-                <ScrollView
-                    scrollEventThrottle={16}
-                    ref={ref => (this.scrollRef = ref)}
-                    style={styles.scrollView}
-                    refreshControl={
-                        <RefreshControl
-                            refreshing={this.props.isRefreshLoading}
-                            onRefresh={this.onRefresh.bind(this)}
-                            tintColor={EStyleSheet.value('$cardText')}
-                        />
-                    }
-                    onScroll={this.onScroll.bind(this)}>
+                <ScrollContent
+                    title={getLocaleString('feed')}
+                    navigation={navigation}
+                    paginator={this.props.paginator}
+                    isLoading={this.props.isLoading}
+                    isRefreshLoading={this.props.isRefreshLoading}
+                    onRefresh={this.onRefresh.bind(this)}
+                    onPaginate={page => this.props.getList(page)}>
                     <DailyPoem />
                     {this.props.feed.map((item, key) => (
                         <PoemComponent item={item} key={key} />
                     ))}
-                </ScrollView>
+                </ScrollContent>
 
                 <BottomBar navigation={navigation} />
             </Content>
