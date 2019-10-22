@@ -7,9 +7,7 @@ import getLocaleString from '../../../locale/index';
 import PoemComponent from '../../components/common/poem/PoemComponent';
 import { Poem } from 'interfaces/poem';
 
-import { getList, refreshFeed } from '../../../actions/feed';
-import { getDailyPoem } from '../../../actions/poem';
-import DailyPoem from '../../components/common/dailypoem/DailyPoem';
+import { getList, refreshFeed, flushFeed } from '../../../actions/feed';
 import ScrollContent from '../../components/common/ScrollContent';
 
 interface Paginator {
@@ -25,27 +23,22 @@ interface Props {
     isRefreshLoading: boolean;
     navigation: NavigationScreenProp<any, any>;
     filters?: any;
-    getList?: (id: number) => void;
+    getList?: (id: number, filters: any) => void;
     refreshFeed?: (options?: any) => void;
     getDailyPoem?: () => void;
+    flushFeed?: () => void;
     isFocused?: boolean;
     paginator: Paginator;
+    dailyPoem: any;
 }
 
-class FeedScreen extends React.Component<Props> {
+class DailyScreen extends React.Component<Props> {
     focusListener;
 
     componentDidMount() {
-        this.props.getList(1);
-        this.props.getDailyPoem();
-
         const { navigation } = this.props;
         this.focusListener = navigation.addListener('didFocus', () => {
-            if (Object.keys(this.props.filters).length === 0) {
-                this.props.refreshFeed({ showLoader: false, filters: this.props.filters });
-            } else {
-                this.props.getList(1);
-            }
+            this.props.getList(1, { daily: this.props.dailyPoem.id });
         });
     }
 
@@ -55,7 +48,6 @@ class FeedScreen extends React.Component<Props> {
 
     onRefresh() {
         this.props.refreshFeed({ filters: this.props.filters });
-        this.props.getDailyPoem();
     }
 
     render() {
@@ -64,14 +56,14 @@ class FeedScreen extends React.Component<Props> {
         return (
             <Content>
                 <ScrollContent
-                    title={getLocaleString('feed')}
+                    title={getLocaleString('daily_poem')}
                     navigation={navigation}
                     paginator={this.props.paginator}
                     isLoading={this.props.isLoading}
                     isRefreshLoading={this.props.isRefreshLoading}
                     onRefresh={this.onRefresh.bind(this)}
-                    onPaginate={page => this.props.getList(page)}>
-                    <DailyPoem />
+                    onPaginate={page => this.props.getList(page, this.props.filters)}
+                    back>
                     {this.props.feed.map((item, key) => (
                         <PoemComponent item={item} key={key} />
                     ))}
@@ -89,12 +81,13 @@ const mapStateToProps = (state: any) => {
         isRefreshLoading: state.feed.isRefreshLoading,
         feed: state.feed.items,
         filters: state.feed.filters,
-        paginator: state.feed.paginator
+        paginator: state.feed.paginator,
+        dailyPoem: state.poem.daily
     };
 };
 
 export default connect(
     mapStateToProps,
-    { getList, refreshFeed, getDailyPoem }
+    { getList, refreshFeed, flushFeed }
     //@ts-ignore
-)(withNavigationFocus(FeedScreen));
+)(withNavigationFocus(DailyScreen));

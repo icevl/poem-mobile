@@ -18,6 +18,7 @@ import AuthScreen from './apps/screens/auth/AuthScreen';
 import PoemFormScreen from './apps/screens/poem/form/PoemFormScreen';
 import PoemCommentsScreen from './apps/screens/poem/PoemCommentsScreen';
 import UserScreen from './apps/screens/user/UserScreen';
+import DailyScreen from './apps/screens/poem/DailyScreen';
 
 interface Props {
     auth: () => void;
@@ -90,6 +91,7 @@ class App extends React.Component<Props, State> {
                 Feed: FeedScreen,
                 Menu: MenuScreen,
                 PoemForm: PoemFormScreen,
+                Daily: DailyScreen,
                 PoemComments: PoemCommentsScreen,
                 User: UserScreen
             },

@@ -1,6 +1,6 @@
 export default {
     logout: 'Выход',
-    feed: 'лента',
+    feed: 'Лента',
     edit: 'Изменить',
     public_poem: 'публикация',
     public_verb: 'опубликовать',
@@ -15,5 +15,6 @@ export default {
     poem_edit: 'Редактировать',
     poem_edit_description: 'Редактировать стих',
 
+    daily_poem: 'Тема дня',
     comments: 'Комментарии'
 };

@@ -4,6 +4,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import { NavigationScreenProp } from 'react-navigation';
 import NavBar from '../../components/menu/navbar/NavBar';
 import styles from './ScrollContent.style';
+import Loader from '../common/Loader';
 
 interface Paginator {
     page: number;
@@ -19,6 +20,7 @@ interface Props {
     children: React.ReactNode;
     isLoading?: boolean;
     paginator?: Paginator;
+    back?: boolean;
     onPaginate?: (page: number) => void;
 }
 
@@ -87,13 +89,13 @@ export default class ScrollContent extends Component<Props, State> {
     }
 
     render() {
-        const { title, navigation, isRefreshLoading, onRefresh, children } = this.props;
+        const { title, navigation, isRefreshLoading, onRefresh, children, back } = this.props;
 
         return (
             <React.Fragment>
-                <NavBar title={title} navigation={navigation} display={this.state.isShowNavbar} />
+                <NavBar title={title} navigation={navigation} display={this.state.isShowNavbar} back={back} />
 
-                {/* <Loader isLoading={this.props.isLoading && this.props.paginator.page === 1} /> */}
+                <Loader isLoading={this.props.isLoading && this.props.paginator.page === 1} />
 
                 <ScrollView
                     scrollEventThrottle={16}

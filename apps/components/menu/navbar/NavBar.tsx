@@ -73,9 +73,7 @@ class TopNavBar extends React.Component<Props, State> {
                 )}
 
                 <View style={styles.titleWrapper}>
-                    <Text style={styles.title}>
-                        {this.props.title ? this.props.title.charAt(0).toUpperCase() + this.props.title.slice(1) : ''}
-                    </Text>
+                    <Text style={styles.title}>{this.props.title}</Text>
                 </View>
 
                 <View style={styles.rightIconWrapper}>

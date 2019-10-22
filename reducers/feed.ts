@@ -86,6 +86,12 @@ export default function feed(state = initialState, action) {
                 isRefreshLoading: false
             };
 
+        case constants.FEED_FLUSH:
+            return {
+                ...state,
+                items: []
+            };
+
         /**
          * Load first page from local
          */

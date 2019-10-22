@@ -4,10 +4,12 @@ import { View, Text } from 'react-native';
 import Card from '../Card';
 import styles from './DailyPoem.style';
 import Touch from '../Touch';
-import { getList } from '../../../../actions/feed';
+import { flushFeed } from '../../../../actions/feed';
+import getLocaleString from '../../../../locale/index';
 
 const DailyPoem = () => {
     const dailyPoem = useSelector((state: any) => state.poem.daily);
+    const navigator = useSelector((state: any) => state.navigation.navigator);
     const dispatch = useDispatch();
 
     if (!dailyPoem || !dailyPoem.title) {
@@ -15,7 +17,8 @@ const DailyPoem = () => {
     }
 
     const getDaily = () => {
-        dispatch(getList(1, { daily: dailyPoem.id }));
+        dispatch(flushFeed());
+        navigator.navigate('Daily');
     };
 
     return (
@@ -23,7 +26,7 @@ const DailyPoem = () => {
             <Card>
                 <View style={styles.container}>
                     <View style={styles.labelWrapper}>
-                        <Text style={styles.label}>Тема дня:</Text>
+                        <Text style={styles.label}>{getLocaleString('daily_poem')}:</Text>
                     </View>
                     <View style={styles.titleWrapper}>
                         <Text style={styles.text}>{dailyPoem.title}</Text>

@@ -1,6 +1,6 @@
 export default {
     logout: 'Logout',
-    feed: 'feed',
+    feed: 'Feed',
     edit: 'Edit',
     public_poem: 'public poem',
     public_verb: 'public',
@@ -13,5 +13,6 @@ export default {
     poem_remove_description: 'Стих больше не будет отображаться в ленте.',
     poem_edit: 'Edit',
     poem_edit_description: 'Редактировать стих',
-    comments: 'Comments'
+    comments: 'Comments',
+    daily_poem: 'Daily poem'
 };

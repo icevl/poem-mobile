@@ -76,3 +76,11 @@ export function getFeedFromLocal() {
         });
     };
 }
+
+export function flushFeed() {
+    return async dispatch => {
+        dispatch({
+            type: constants.FEED_FLUSH
+        });
+    };
+}
