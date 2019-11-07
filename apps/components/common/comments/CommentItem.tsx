@@ -3,7 +3,6 @@ import { View, Text } from 'react-native';
 import { Image } from 'react-native-expo-image-cache';
 import Touch from '../../../components/common/Touch';
 import Time from '../../../components/common/Time';
-// import Verified from '../user/Verified';
 import styles from './CommentItem.style';
 
 const CommentItem = props => {

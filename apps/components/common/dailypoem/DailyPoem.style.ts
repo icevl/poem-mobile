@@ -22,6 +22,5 @@ export default EStyleSheet.create({
     text: {
         paddingLeft: 5,
         color: '$cardText'
-        // textDecorationLine: 'underline'
     }
 });

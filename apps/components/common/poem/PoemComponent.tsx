@@ -101,7 +101,6 @@ class PoemComponent extends Component<Props> {
     }
 
     openPoemDetails() {
-        // this.props.loadPoemDetails(this.props.item);
         this.props.navigator.navigate('PoemComments', { poem: this.props.item });
     }
 

@@ -11,10 +11,7 @@ export default EStyleSheet.create({
     },
 
     menuIcon: {
-        // paddingTop: Platform.OS === 'ios' ? 18 : 15,
-        // paddingLeft: 12,
         color: '$navbarText'
-        // opacity: 0.3
     },
 
     logoImage: {
@@ -34,10 +31,7 @@ export default EStyleSheet.create({
     },
 
     leftIcon: {
-        // paddingTop: Platform.OS === 'ios' ? 18 : 15,
-        // paddingLeft: 12,
         color: '$navbarText'
-        // opacity: 0.3
     },
 
     titleWrapper: {
@@ -61,11 +55,5 @@ export default EStyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         marginRight: 14
-    },
-
-    buttonContainer: {
-        // width: 60,
-        // height: '100%',
-        // marginLeft: 5
     }
 });

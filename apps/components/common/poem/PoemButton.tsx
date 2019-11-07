@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View, Text, TouchableWithoutFeedback } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './PoemButton.style';
-// import Touch from '../Touch';
 
 interface Props {
     value: string;

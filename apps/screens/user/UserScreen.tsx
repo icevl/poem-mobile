@@ -5,7 +5,6 @@ import { NavigationScreenProp, withNavigationFocus } from 'react-navigation';
 import NavBar from '../../components/menu/navbar/NavBar';
 import BottomBar from '../../components/menu/bottombar/BottomBar';
 import Content from '../../components/content/Content';
-// import getLocaleString from '../../../locale/index';
 import styles from './UserScreen.style';
 
 interface Props {
@@ -23,13 +22,12 @@ class UserScreen extends React.Component<Props> {
     componentDidUpdate(prevProps) {
         if (!prevProps.isFocused && this.props.isFocused) {
             //@ts-ignore
-            // this.scrollRef.scrollTo({ x: 0, y: 0, animated: false });
             this.props.refreshFeed({ showLoader: true });
         }
     }
 
     onRefresh() {
-        // this.props.refreshFeed();
+        // TODO: future use
     }
 
     render() {
@@ -57,10 +55,6 @@ class UserScreen extends React.Component<Props> {
         );
     }
 }
-
-// const mapStateToProps = (state: any) => {
-//     return {};
-// };
 
 export default connect(
     null,

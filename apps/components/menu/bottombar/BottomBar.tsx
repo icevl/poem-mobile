@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavigationScreenProp } from 'react-navigation';
@@ -12,15 +12,10 @@ interface Props {
 }
 
 const BottomBar = (props: Props) => {
-    const user = useSelector((state: any) => state.user);
     const feedFilters = useSelector((state: any) => state.feed.filters);
     const dispatch = useDispatch();
 
     const currentScreen = props.navigation.state.routeName;
-
-    useEffect(() => {
-        // console.log('user', user.id);
-    }, [user]);
 
     const setScreen = (screen: string) => {
         props.navigation.navigate(screen);

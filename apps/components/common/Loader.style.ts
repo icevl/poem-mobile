@@ -8,7 +8,6 @@ export default StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         zIndex: 2
-        // backgroundColor: 'rgba(00, 00, 00, 0.8)'
     },
 
     image: {

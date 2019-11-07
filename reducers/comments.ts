@@ -1,8 +1,6 @@
 import constants from '../constants/comments';
 import { updateItemList } from '../helpers/common';
 
-// import constantsPoem from '../constants/comments';
-
 const initialState = {
     isLoading: false,
     isRefreshLoading: false,

@@ -21,7 +21,6 @@ export default EStyleSheet.create({
         fontWeight: 'bold',
         fontSize: config.size.text,
         marginLeft: 8,
-        // textAlign: 'center',
         width: 40
     },
 

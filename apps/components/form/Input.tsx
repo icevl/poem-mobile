@@ -40,7 +40,6 @@ const Input = (props: Props) => {
                     textAlignVertical={!!numberOfLines ? 'top' : 'center'}
                     onFocus={onFocus ? onFocus.bind(this) : null}
                     onBlur={onBlur ? onBlur.bind(this) : null}
-                    // maxLength={1000}
                 />
             </View>
         </View>

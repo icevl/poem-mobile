@@ -11,11 +11,6 @@ interface Props {
 }
 
 class AuthScreen extends Component<Props> {
-    componentDidMount() {
-        // kabanov.mike@gmail.com
-        // ice246246
-    }
-
     async logIn() {
         try {
             const { type, token } = await Facebook.logInWithReadPermissionsAsync('2410697895916398');
@@ -35,10 +30,6 @@ class AuthScreen extends Component<Props> {
         );
     }
 }
-
-// const mapStateToProps = (state: any) => {
-//     return {};
-// };
 
 export default connect(
     null,

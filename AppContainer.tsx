@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import * as Font from 'expo-font';
 
 interface Props {
@@ -8,7 +7,6 @@ interface Props {
 
 const AppContainer = (props: Props) => {
     const [isFontsLoaded, setIsFontsLoaded] = useState<Boolean>(false);
-    const user = useSelector((state: any) => state.user);
 
     const loadFonts = async () => {
         await Font.loadAsync({
@@ -22,10 +20,6 @@ const AppContainer = (props: Props) => {
     useEffect(() => {
         loadFonts();
     }, [isFontsLoaded]);
-
-    useEffect(() => {
-        // console.log('user', user);
-    }, [user]);
 
     return isFontsLoaded ? props.children : null;
 };

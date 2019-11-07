@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 
-// const TouchComponent = Platform.OS === 'ios' ? TouchableOpacity : TouchableOpacity;
-
 interface Props {
     onPress?: any;
     feedback?: boolean;

@@ -104,7 +104,6 @@ export default EStyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         flexGrow: 1
-        // width: Dimensions.get('window').width - 80
     },
 
     buttonsActionWrapper: {

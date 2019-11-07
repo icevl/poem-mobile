@@ -30,7 +30,6 @@ class Menu extends React.Component<Props> {
     }
 
     async onSetLanguage(language: string) {
-        // await UserModel.request({ type: 'PUT', url: `${config.paths.users}setlang`, data: { lang: language } });
         await setLocale(language);
         this.props.refreshApplication();
     }
